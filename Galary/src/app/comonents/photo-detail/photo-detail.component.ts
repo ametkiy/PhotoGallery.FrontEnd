@@ -23,7 +23,7 @@ export class PhotoDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.activeteRoute.snapshot.paramMap.get('id');
-    this.photoService.getPhoto(Number(id))
+    this.photoService.getPhoto(id)
     .subscribe(photo =>{
       this.photo = photo;
       

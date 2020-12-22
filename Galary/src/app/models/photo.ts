@@ -2,7 +2,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { SafeResourceUrl } from '@angular/platform-browser';
 
 export class Photo{
-    id!: number;
+    id!: any;
     fileName!: string;
     description!:string;
     albumId!:number;

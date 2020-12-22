@@ -18,11 +18,26 @@ export class AddPhotoComponent implements OnInit {
   }
 
   onFileSelected(event:any){
+    var data = new FormData();
+    if(event.target.files.length > 1) {
+        for(var x = 0; x < event.target.files.length; x++) {
+            data.append('Files', event.target.files.item(x));    
+        }
+    } else {
+        data.append('Files', event.target.files[0]);   
+    }
+
+    this.photoService.addPhoto(data).subscribe((response) => {
+      console.log("add");
+      this.fileIsUploadedonServerEvent.emit("File uploaded");
+    });
+  }
+
+  onFileSelected11(event:any){
     if (event.target.files && event.target.files[0]) {
         let file = <File>event.target.files[0];
         let fd = new FormData();
         fd.append("File",file,file.name);
-        fd.append("tmp",file.name);
 
         this.photoService.addPhoto(fd).subscribe((response) => {
           console.log("add");

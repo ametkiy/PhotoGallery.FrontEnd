@@ -37,7 +37,7 @@ export class PhotoService {
     return result;
   }
 
-  getPhoto(id: number): Observable<Photo> {
+  getPhoto(id: any): Observable<Photo> {
     const url = `${this.photoUrl}/${id}`;
     let result = this.http.get<Photo>(url).pipe(
       tap(()=>console.info(`Fetched photo id=${id}`)),
@@ -47,7 +47,6 @@ export class PhotoService {
   }
 
   addPhoto(photo: FormData): Observable<Photo> {
-    //console.log(photo);
     let tmp = this.http.post<Photo>(this.photoUrl, photo).pipe(
       tap((newphoto: Photo) => console.info(`added photo  id=${newphoto.id}`)),
       catchError(this.handleError<Photo>('addPhoto'))
