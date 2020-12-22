@@ -1,0 +1,103 @@
+.loaded{
+    width: 100%;
+    height: 100%;
+    text-align:  center;
+    min-height: 350 px;
+    font-size: x-large;
+    color: seagreen;
+    vertical-align: center;
+    align-items: center;
+    margin: 50px;
+}
+
+.navigation{
+    width: 100%; 
+    text-align:  center;
+    min-height: 300 px;
+    vertical-align: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.image{
+    max-height: 300px;
+    max-width: 300px;
+}
+.image img { width: 80%;}
+
+.imgBox{
+    width: 720px;
+    margin: 50px auto 20px;
+}
+
+.imgBox img{
+    width: 100%;
+    border: 4px solid #FFF;
+    box-shadow: 0 5px 25px rgba(0,0,0,.5) ;
+}
+
+ul.thumb{
+    max-width: 90%;
+    overflow: auto;
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul.thumb li{
+    list-style: none;
+    margin: 0 20px;
+
+}
+
+ul.thumb li img{
+    width: 100%; /* Ширина изображений */
+    height: 100%; /* Высота изображении */
+    object-fit: cover; /* Вписываем фотографию в область */
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 250px;
+    max-height: 250px;
+    cursor: pointer;
+    border: 4px solid #FFF;
+    box-shadow: 0 5px 25px rgba(0,0,0,.5) ; 
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.container img {
+    width: 100%;
+    height: auto;
+}
+
+.container .btn {
+    position: absolute;
+    top: 10%;
+    left: 95%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 10px 10px;
+    border: none;
+    cursor: pointer;
+    border: 2px solid #FFF;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.container .title{
+    margin: 0;
+    background: yellow;
+
+    align-items: center;
+ 
+   
+}

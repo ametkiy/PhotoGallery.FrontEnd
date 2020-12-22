@@ -1,0 +1,29 @@
+<button (click)="goBack()">Back</button>
+
+<div *ngIf="photo">
+    <h3>{{photo.fileName | uppercase}}</h3>
+    <div>
+        <span>id: </span>{{photo.id}}
+    </div>
+    <div>
+        <span>File name: </span>{{photo.fileName}}
+    </div>
+    <div>
+        <span>Add date: </span>{{photo.addDate | date:'dd-MM-yyyy HH:mm:ss'}}
+    </div>
+    <div>
+        <label>
+            Description:
+            <textarea class="description" [(ngModel)] = "photo.description" placeholder="Description"></textarea>
+        </label>
+        <div class="container">
+            <div class="center">
+              <button (click)="saveDescriptions()">Update Description</button>
+            </div>
+          </div>
+        <div class="imgBox">
+            <img [src]=photo_url(photo) />
+        </div>
+    </div>
+</div>
+

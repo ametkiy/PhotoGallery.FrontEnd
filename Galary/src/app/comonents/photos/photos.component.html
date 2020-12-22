@@ -1,0 +1,36 @@
+<app-add-photo (fileIsUploadedonServerEvent)="reloadPhotoListAfterAdd()"></app-add-photo>
+
+<div *ngIf="loadedData; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+    <div class="loaded">
+        Loaded...
+    </div>
+</ng-template>
+<ng-template #elseBlock>
+    <div *ngIf="photoCount<1" class="loaded"> No photo in DataBase </div>
+    <div>
+        <div *ngIf="selectedImageSource" class="imgBox">
+            <img [src]=selectedImageSource>
+        </div>
+        <div class="navigation" *ngIf="selectedImageSource">
+            <button (click)="previousPage()">Previous page</button>
+            Page {{page}} from {{totalPages}}
+            <button (click)="nextPage()">Next page</button>
+        </div>
+        <ul class="thumb">
+            <li *ngFor="let photo of photos">
+                <div class="container">
+                    <button class="btn" (click)="deletePhotoById(photo)">X</button>
+                    <img [src]=photo_url(photo) width="220px" (click)="showSelectedPhoto(photo)">
+                    <br>
+                    <a class="title" routerLink="/detail/{{photo.id}}"> {{photo.fileName}}</a>
+                </div>
+
+            </li>
+        </ul>
+</div>
+</ng-template>
+
+
+
+    
