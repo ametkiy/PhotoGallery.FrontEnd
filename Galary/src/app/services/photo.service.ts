@@ -28,7 +28,7 @@ export class PhotoService {
     }
   }
 
-  getPhotos(page:number, pageSize:number): Observable<PageOfFoto>{
+  getPhotos(page:number, pageSize:number): Observable<PageOfFoto| never[]>{
     const url = `${this.photoUrl}?pageSize=${pageSize}&page=${page}`;
     let result = this.http.get<PageOfFoto| never[]>(url).pipe(
       tap(()=>console.info('Fetched photos')),

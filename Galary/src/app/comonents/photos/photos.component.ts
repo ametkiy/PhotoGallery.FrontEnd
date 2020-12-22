@@ -40,12 +40,12 @@ export class PhotosComponent implements OnInit {
 
   getPhotos():void{
     this.loadedData = true;
-    this.photoService.getPhotos(this.page, this.pageSize).subscribe((pageOfFoto: PageOfFoto | undefined) =>{
+    this.photoService.getPhotos(this.page, this.pageSize).subscribe((pageOfFoto: PageOfFoto | any) =>{
       if (pageOfFoto!=null){
         this.loadedData = false;
         this.photos = pageOfFoto?.photos;
         if(this.photos!=null){
-          this.photoCount = pageOfFoto?.count;
+          this.photoCount = pageOfFoto.count;
           this.totalPages = Math.ceil(this.photoCount / this.pageSize);
           if (this.photos!.length>0 && (this.selectedImageSource==null || this.selectedImageSource=="")){
             this.selectedImageSource = this.photo_url(this.photos![0]);
