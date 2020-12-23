@@ -55,16 +55,16 @@ export class PhotoService {
   updatePhoto(photo: Photo): Observable<any> {
     const url = `${this.photoUrl}/${photo.id}`;
     return this.http.put(url, photo, this.httpOptions).pipe(
-      tap(_ => console.info(`updated photo id=${photo.id}`)),
+      tap((id: any)=> console.info(`updated photo id=${id}`)),
       catchError(this.handleError<any>('updatePhoto'))
     );
   }
 
-  deletePhoto(id:number): Observable<Photo>{
+  deletePhoto(id:number): Observable<any>{
     const url = `${this.photoUrl}/${id}`;
     return this.http.delete<Photo>(url).pipe(
-      tap(_ => console.info(`deleted photo id=${id}`)),
-      catchError(this.handleError<Photo>('deleteHero'))
+      tap((deletedId: any)=> console.info(`deleted photo id=${deletedId}`)),
+      catchError(this.handleError<Photo>('deletePhoto'))
     );
   }
 }

@@ -13,7 +13,7 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 })
 export class PhotoDetailComponent implements OnInit {
   selectedImageSource!: SafeResourceUrl | undefined;
-  photo: Photo |undefined;
+  photo!: Photo ;
 
   constructor(
     private activeteRoute:ActivatedRoute,
@@ -35,11 +35,20 @@ export class PhotoDetailComponent implements OnInit {
   }
 
   saveDescriptions(){
-    this.photoService.updatePhoto(this.photo!).subscribe(() => alert('Update compleate'));
+    this.photoService.updatePhoto(this.photo!).subscribe((id:any) => {
+      if (id!=null && id == this.photo.id)
+        alert('Update compleate');
+      else
+        alert('An error occurred while editing');
+    });
   }
 
   photo_url(data: Photo):SafeResourceUrl{
     return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${data.photoData}`);;
+  }
+
+  albumChengedEvent(value:any){
+    this.photo.albumId = value;
   }
 
 }

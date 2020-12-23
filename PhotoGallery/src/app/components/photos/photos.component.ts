@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Photo} from '../../models/photo'
-import {PhotoService} from '../../services/photo.service'
+import { PhotoService} from '../../services/photo.service'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { PageOfFoto } from 'src/app/models/pageOfPhotos';
 
@@ -23,7 +23,7 @@ export class PhotosComponent implements OnInit {
   constructor(private photoService:PhotoService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this. getPhotos();
+    this.getPhotos();
   }
 
   reloadPhotoListAfterAdd(addedFilesCount:number):void{
@@ -81,13 +81,16 @@ export class PhotosComponent implements OnInit {
   deletePhotoById(photo:Photo){
     if(confirm("Are you sure to delete this file: "+photo.fileName)) {
       this.photoService.deletePhoto(photo.id).subscribe((response) => {
-        this.selectedImageSource=""; 
-        this.photoCount--;
-        this.totalPages = Math.ceil(this.photoCount / this.pageSize);
-        if (this.page>this.totalPages){
-          this.page--;
-        }
-        this.getPhotos();
+        if (response == photo.id){
+          this.selectedImageSource=""; 
+          this.photoCount--;
+          this.totalPages = Math.ceil(this.photoCount / this.pageSize);
+          if (this.page>this.totalPages){
+            this.page--;
+          }
+          this.getPhotos();
+        }else
+          alert("Cann't delete photo")
 
       });
     }

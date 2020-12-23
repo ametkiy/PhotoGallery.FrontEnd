@@ -27,12 +27,27 @@ export class AlbumService {
 
   getAlbums(): Observable<Album | never[]>{
     let result = this.http.get<Album>(this.albumUrl).pipe(
-      tap(()=>console.info('Fetched album')),
+      tap(()=>console.info('Fetched albums')),
       catchError(this.handleError('getAlbums',[]))
     );
     return result;
   }
 
+  addAlbum(album: Album): Observable<any> {
+    let tmp = this.http.post<any>(this.albumUrl, album).pipe(
+      tap((newAlbumId: number) => console.info(`added album`)),
+      catchError(this.handleError<any>('addAlbum'))
+    );
+    return tmp;
+  }
 
+  
+  deleteAlbum(id:number): Observable<any>{
+    const url = `${this.albumUrl}/${id}`;
+    return this.http.delete<any>(url).pipe(
+      tap((deletedId:any) => console.info(`deleted photo id=${deletedId}`)),
+      catchError(this.handleError<any>('deleteAlbum'))
+    );
+  }
   
 }

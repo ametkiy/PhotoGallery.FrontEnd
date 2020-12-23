@@ -1,1 +1,15 @@
-<p>album-list works!</p>
+Album:
+<select ng-model="selectedAlbum" [(ngModel)]="selectedAlbum" (change)="onChangeAlbum($event.target.value)">
+    <option [ngValue]="null"></option>
+     <option *ngFor="let album of albums" value="{{album.id}}">
+        {{album.title}}
+    </option> 
+</select>
+<button class="addButton" (click)="startAddAlbum()">Add Album</button>
+<button class="deleteButton" (click)="deleteAlbum()">Delete Album</button>
+
+<div class="addContainer" *ngIf = "startedAddAlbum">
+    Album title:
+    <input #box (keyup.enter)="addAlbum(box.value)">
+    <button (click) = "addAlbum(box.value)">Add</button>
+</div>

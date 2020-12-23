@@ -1,0 +1,22 @@
+.addButton{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.deleteButton{
+    margin-left: 10px;
+    margin-right: 10px; 
+
+}
+
+.addContainer{
+    margin: 15px;
+}
+
+.addContainer button{
+    margin-left: 10px;
+}
+
+.addContainer input{
+    margin-left: 10px;
+}
