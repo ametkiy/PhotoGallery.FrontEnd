@@ -5,18 +5,20 @@ import { FormsModule} from '@angular/forms'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PhotosComponent } from './comonents/photos/photos.component';
-import { PhotoDetailComponent } from './comonents/photo-detail/photo-detail.component';
+import { PhotosComponent } from './components/photos/photos.component';
+import { PhotoDetailComponent } from './components/photo-detail/photo-detail.component';
 
 import { PhotoService } from '../app/services/photo.service';
-import { AddPhotoComponent } from './comonents/add-photo/add-photo.component'
+import { AddPhotoComponent } from './components/add-photo/add-photo.component';
+import { AlbumListComponent } from './components/album-list/album-list.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     PhotosComponent,
     PhotoDetailComponent,
-    AddPhotoComponent
+    AddPhotoComponent,
+    AlbumListComponent
   ],
   imports: [
     BrowserModule,

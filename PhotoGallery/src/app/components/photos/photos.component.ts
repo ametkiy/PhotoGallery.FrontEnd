@@ -23,15 +23,14 @@ export class PhotosComponent implements OnInit {
   constructor(private photoService:PhotoService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.getPhotos();
+    this. getPhotos();
   }
 
-  reloadPhotoListAfterAdd():void{
-    this.photoCount++;
+  reloadPhotoListAfterAdd(addedFilesCount:number):void{
+    this.photoCount = this.photoCount + addedFilesCount;
     this.totalPages = Math.ceil(this.photoCount / this.pageSize);
     this.page = this.totalPages;
     this.getPhotos();
-
   }
 
   photo_url(data: Photo):SafeResourceUrl{

@@ -1,4 +1,4 @@
-<app-add-photo (fileIsUploadedonServerEvent)="reloadPhotoListAfterAdd()"></app-add-photo>
+<app-add-photo (fileIsUploadedOnServerEvent)="reloadPhotoListAfterAdd($event)"></app-add-photo>
 
 <div *ngIf="loadedData; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>

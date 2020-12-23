@@ -5,6 +5,7 @@ import { Observable, from } from 'rxjs'
 import { of } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {catchError,map,tap} from 'rxjs/operators'
+import { CreatePhotoResult } from '../models/createPhotoResult';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +15,7 @@ export class PhotoService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE' 
-  },
-    
-    )
-  };
+  })};
 
   constructor(private http:HttpClient) { }
 
@@ -32,7 +30,7 @@ export class PhotoService {
     const url = `${this.photoUrl}?pageSize=${pageSize}&page=${page}`;
     let result = this.http.get<PageOfFoto| never[]>(url).pipe(
       tap(()=>console.info('Fetched photos')),
-      catchError(this.handleError('getHeroes',[]))
+      catchError(this.handleError('getPhotos',[]))
     );
     return result;
   }
@@ -46,12 +44,11 @@ export class PhotoService {
      return result;
   }
 
-  addPhoto(photo: FormData): Observable<Photo> {
-    let tmp = this.http.post<Photo>(this.photoUrl, photo).pipe(
-      tap((newphoto: Photo) => console.info(`added photo  id=${newphoto.id}`)),
-      catchError(this.handleError<Photo>('addPhoto'))
+  addPhoto(photo: FormData): Observable<CreatePhotoResult> {
+    let tmp = this.http.post<CreatePhotoResult>(this.photoUrl, photo).pipe(
+      tap((newphoto: CreatePhotoResult) => console.info(`added photo`)),
+      catchError(this.handleError<CreatePhotoResult>('addPhoto'))
     );
-    console.log(tmp);
     return tmp;
   }
 
