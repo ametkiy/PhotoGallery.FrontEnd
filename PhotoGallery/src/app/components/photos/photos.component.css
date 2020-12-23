@@ -96,8 +96,10 @@ ul.thumb li img{
 .container .title{
     margin: 0;
     background: yellow;
-
     align-items: center;
- 
-   
+}
+
+.navigation button{
+    margin-left: 10px;
+    margin-right: 10px;
 }

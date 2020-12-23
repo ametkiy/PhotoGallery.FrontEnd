@@ -6,7 +6,7 @@ Album:
     </option> 
 </select>
 <button class="addButton" (click)="startAddAlbum()">Add Album</button>
-<button class="deleteButton" (click)="deleteAlbum()">Delete Album</button>
+<button *ngIf = "selectedAlbum" class="deleteButton" (click)="deleteAlbum()">Delete Album</button>
 
 <div class="addContainer" *ngIf = "startedAddAlbum">
     Album title:

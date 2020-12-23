@@ -13,9 +13,11 @@
             <img [src]=selectedImageSource>
         </div>
         <div class="navigation" *ngIf="selectedImageSource">
-            <button (click)="previousPage()">Previous page</button>
+            <button *ngIf="(page>1 && totalPages>1)" (click)="onFirstPageClick()">First page</button>
+            <button *ngIf="(page>1 && totalPages>1)" (click)="previousPage()">Previous page</button>
             Page {{page}} from {{totalPages}}
-            <button (click)="nextPage()">Next page</button>
+            <button *ngIf="(page<totalPages && totalPages>1)" (click)="nextPage()">Next page</button>
+            <button *ngIf="(page<totalPages && totalPages>1)" (click)="onLastPageClick()">Last page</button>
         </div>
         <ul class="thumb">
             <li *ngFor="let photo of photos">

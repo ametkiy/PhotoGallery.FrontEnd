@@ -96,4 +96,13 @@ export class PhotosComponent implements OnInit {
     }
   }
 
+  onLastPageClick(){
+    this.page = this.totalPages;
+    this.getPhotos();
+  }
+
+  onFirstPageClick(){
+    this.page = 1;
+    this.getPhotos();
+  }
 }
