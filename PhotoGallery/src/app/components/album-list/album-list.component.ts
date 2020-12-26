@@ -27,8 +27,11 @@ export class AlbumListComponent implements OnInit {
     });
   }
 
-  onChangeAlbum(value:any){
-    this.newSelectedAlbumEvent.emit(this.selectedAlbum);
+  onChangeAlbum(event:any){
+    if (event!=null){
+      let value = event.target.value;
+      this.newSelectedAlbumEvent.emit(this.selectedAlbum);
+    }
   }
 
   startAddAlbum(){

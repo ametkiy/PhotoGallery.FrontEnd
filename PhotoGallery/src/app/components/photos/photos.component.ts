@@ -12,7 +12,7 @@ import { PageOfFoto } from 'src/app/models/pageOfPhotos';
 })
 export class PhotosComponent implements OnInit {
   selectedImageSource!: SafeResourceUrl | undefined;
-  photos:Photo[] | undefined;
+  photos:Photo[] = [];
   selectedPhoto:Photo|undefined;
   loadedData:boolean = false;
   photoCount :number =0;
@@ -23,7 +23,8 @@ export class PhotosComponent implements OnInit {
   constructor(private photoService:PhotoService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.getPhotos();
+    if (this.photos==null||this.photos.length==0)
+      this.getPhotos();
   }
 
   reloadPhotoListAfterAdd(addedFilesCount:number):void{
@@ -40,20 +41,23 @@ export class PhotosComponent implements OnInit {
   getPhotos():void{
     this.loadedData = true;
     this.photoService.getPhotos(this.page, this.pageSize).subscribe((pageOfFoto: PageOfFoto | any) =>{
-      if (pageOfFoto!=null){
+      if (pageOfFoto==null || this.photos==null){
+        this.photoCount = 0;
+        this.totalPages = 0;
+      }else{
         this.loadedData = false;
         this.photos = pageOfFoto?.photos;
-        if(this.photos!=null){
-          this.photoCount = pageOfFoto.count;
-          this.totalPages = Math.ceil(this.photoCount / this.pageSize);
-          if (this.photos!.length>0 && (this.selectedImageSource==null || this.selectedImageSource=="")){
-            this.selectedImageSource = this.photo_url(this.photos![0]);
-          }
-        }else{
-          this.photoCount = 0;
-          this.totalPages = 0;
+        this.photoCount = pageOfFoto.count;
+        this.totalPages = Math.ceil(this.photoCount / this.pageSize);
+        for(let i=0; i<this.photos.length;i++){
+          this.photoService.getPhoto(this.photos[i].id)
+            .subscribe(photo =>{
+              this.photos[i].photoData = photo.photoData;
+              if (i==0){
+                this.selectedImageSource = this.photo_url(this.photos[i]);
+              }
+            });
         }
-
       }
     });
   }

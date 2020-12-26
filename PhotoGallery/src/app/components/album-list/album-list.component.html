@@ -1,5 +1,5 @@
 Album:
-<select ng-model="selectedAlbum" [(ngModel)]="selectedAlbum" (change)="onChangeAlbum($event.target.value)">
+<select ng-model="selectedAlbum" [(ngModel)]="selectedAlbum" (change)="onChangeAlbum($event)">
     <option [ngValue]="null"></option>
      <option *ngFor="let album of albums" value="{{album.id}}">
         {{album.title}}
