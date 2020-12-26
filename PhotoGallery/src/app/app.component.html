@@ -1,5 +1,4 @@
 <h1>{{title}}</h1>
-<router-outlet></router-outlet>
-<!--
-<app-photos></app-photos>
--->
+<button type="button" [routerLink]="'/photos'" class="btn btn-primary-outline pull-right" ><i class="fa fa-plus"></i> Photos</button>  
+<button type="button" [routerLink]="'/albums'" class="btn btn-primary-outline pull-right" ><i class="fa fa-plus"></i> Albums</button>  
+<router-outlet></router-outlet> 

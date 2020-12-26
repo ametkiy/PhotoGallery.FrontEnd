@@ -10,7 +10,8 @@ import { PhotoDetailComponent } from './components/photo-detail/photo-detail.com
 
 import { PhotoService } from '../app/services/photo.service';
 import { AddPhotoComponent } from './components/add-photo/add-photo.component';
-import { AlbumListComponent } from './components/album-list/album-list.component'
+import { AlbumListComponent } from './components/album-list/album-list.component';
+import { AlbumsComponent } from './components/albums/albums.component'
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AlbumListComponent } from './components/album-list/album-list.component
     PhotosComponent,
     PhotoDetailComponent,
     AddPhotoComponent,
-    AlbumListComponent
+    AlbumListComponent,
+    AlbumsComponent
   ],
   imports: [
     BrowserModule,
