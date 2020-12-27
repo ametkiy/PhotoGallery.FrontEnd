@@ -1,15 +1,19 @@
 Album:
-<select ng-model="selectedAlbum" [(ngModel)]="selectedAlbum" (change)="onChangeAlbum($event)">
-    <option [ngValue]="null"></option>
-     <option *ngFor="let album of albums" value="{{album.id}}">
-        {{album.title}}
-    </option> 
-</select>
-<button class="addButton" (click)="startAddAlbum()">Add Album</button>
-<button *ngIf = "selectedAlbum" class="deleteButton" (click)="deleteAlbum()">Delete Album</button>
-
-<div class="addContainer" *ngIf = "startedAddAlbum">
-    Album title:
-    <input #box (keyup.enter)="addAlbum(box.value)">
-    <button (click) = "addAlbum(box.value)">Add</button>
+<div class="selectControll">
+    <select ng-model="selectedAlbum" [(ngModel)]="selectedAlbum" (change)="onChangeAlbum($event)" class="browser-default custom-select">
+        <option [ngValue]="null"></option>
+        <option *ngFor="let album of albums" value="{{album.id}}">
+            {{album.title}}
+        </option> 
+    </select>
+    <button class="btn btn-outline-success btn-sm" (click)="startAddAlbum()">Add Album</button>
+    <button *ngIf = "selectedAlbum" class="btn btn-outline-danger btn-sm" (click)="deleteAlbum()">Delete Album</button>
 </div>
+
+<form>
+    <div class="form-group"  *ngIf = "startedAddAlbum">
+        Album title:
+        <input #box (keyup.enter)="addAlbum(box.value)" class="form-control">
+        <button (click) = "addAlbum(box.value)" class="btn btn-outline-success">Add</button>
+    </div>
+</form>

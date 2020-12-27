@@ -1,6 +1,6 @@
-<button (click)="goBack()">Back</button>
+<button class="btn btn-primary " (click)="goBack()">Back</button>
 
-<div *ngIf="photo">
+<div *ngIf="photo" class="form-group">
     <h3>{{photo.fileName | uppercase}}</h3>
     <div>
         <span>id: </span>{{photo.id}}
@@ -21,7 +21,7 @@
         </label>
         <div class="container">
             <div class="center">
-              <button (click)="saveDescriptions()">Update Description</button>
+              <button (click)="saveDescriptions()" class="btn btn-success">Update Description</button>
             </div>
           </div>
         <div class="imgBox">

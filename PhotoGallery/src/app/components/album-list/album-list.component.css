@@ -1,22 +1,26 @@
-.addButton{
+.btn.btn-outline-success{
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.deleteButton{
+.btn.btn-outline-danger{
     margin-left: 10px;
     margin-right: 10px; 
 
 }
 
-.addContainer{
+.form-group{
     margin: 15px;
 }
 
-.addContainer button{
-    margin-left: 10px;
+.form-group .btn.btn-outline-success button{
+    margin: 10px;
 }
 
-.addContainer input{
-    margin-left: 10px;
+.form-group .form-control input{
+    margin: 10px;
+}
+
+.selectControl{
+    vertical-align: middle;
 }

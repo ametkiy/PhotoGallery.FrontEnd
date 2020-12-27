@@ -1,4 +1,11 @@
-<h1>{{title}}</h1>
-<button type="button" [routerLink]="'/photos'" class="btn btn-primary-outline pull-right" ><i class="fa fa-plus"></i> Photos</button>  
-<button type="button" [routerLink]="'/albums'" class="btn btn-primary-outline pull-right" ><i class="fa fa-plus"></i> Albums</button>  
+<h1 class="title">{{title}}</h1>
+<ul class="nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active" [routerLink]="'/photos'" routerLinkActive="active">Photos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="'/albums'" routerLinkActive="active" >Albums</a>
+    </li>
+</ul>
+
 <router-outlet></router-outlet> 
