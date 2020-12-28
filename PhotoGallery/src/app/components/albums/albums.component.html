@@ -7,12 +7,19 @@
             <a  class="list-group-item list-group-item-action" [ngClass]="{'active': selectedAlbumId == '00000000-0000-0000-0000-000000000000'}" (click)="listAlbumsClick($event, '00000000-0000-0000-0000-000000000000')">
               Without Album 
             </a>
-            <a  class="list-group-item list-group-item-action" [ngClass]="{'active': selectedAlbumId == album.id}" (click)="listAlbumsClick($event, album.id)" *ngFor="let album of albums">
-                {{ album.title }} 
+            <div *ngFor="let album of albums" class="d-flex bd-highlight">
+                <div class="p-2 flex-grow-1 bd-highlight">
+                    <a  class="list-group-item list-group-item-action" [ngClass]="{'active': selectedAlbumId == album.id}" (click)="listAlbumsClick($event, album.id)" 
+                            data-toggle="tooltip" title="{{ album.title }}  {{ album.description }}">
+                        {{ album.title }} 
+                    </a>
+                </div>
+
+                <div class="p-2 bd-highlight">                       
                     <button class="btn btn-info" (click)="editAlbumById(album)">Edit</button>
                     <button class="btn btn-danger" (click)="deleteAlbumById(album.id)">X</button>
-              </a>
-
+                </div> 
+            </div>
           </div>
     </div>
     <div class="block_center">

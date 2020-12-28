@@ -11,7 +11,7 @@ import { AlbumService } from 'src/app/services/album.service';
   styleUrls: ['./edit-album.component.css']
 })
 export class EditAlbumComponent implements OnInit {
-  album:Album | undefined;
+  album:Album = new Album();
   constructor(private dialogBox:MatDialogRef<EditAlbumComponent>,
     private albumService:AlbumService,
     @Inject(MAT_DIALOG_DATA) public data: {editAlbum: Album}) { }

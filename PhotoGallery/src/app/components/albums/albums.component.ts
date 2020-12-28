@@ -60,7 +60,7 @@ export class AlbumsComponent implements OnInit {
 
     let dialogRef = this.dialog.open(EditAlbumComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      if (result==true){
+      if (result!=null){
         this.getAlbums();
       }
     });

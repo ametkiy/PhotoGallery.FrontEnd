@@ -10,11 +10,3 @@ Album:
     <button *ngIf = "selectedAlbum" class="btn btn-outline-info btn-sm" (click)="editAlbum()">Edit Album</button>
     <button *ngIf = "selectedAlbum" class="btn btn-outline-danger btn-sm" (click)="deleteAlbum()">Delete Album</button>
 </div>
-
-<form>
-    <div class="form-group"  *ngIf = "startedAddAlbum">
-        Album title:
-        <input #box (keyup.enter)="addAlbum(box.value)" class="form-control">
-        <button (click) = "addAlbum(box.value)" class="btn btn-outline-success">Add</button>
-    </div>
-</form>
