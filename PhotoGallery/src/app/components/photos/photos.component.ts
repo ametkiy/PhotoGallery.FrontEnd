@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Photo} from '../../models/photo'
 import { PhotoService} from '../../services/photo.service'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -11,27 +11,32 @@ import { PageOfFoto } from 'src/app/models/pageOfPhotos';
   styleUrls: ['./photos.component.css']
 })
 export class PhotosComponent implements OnInit {
+  @Input() selectedAlbumID:any = '00000000-0000-0000-0000-000000000000';
   selectedImageSource!: SafeResourceUrl | undefined;
   photos:Photo[] = [];
   selectedPhoto:Photo|undefined;
   loadedData:boolean = false;
-  photoCount :number =0;
+  photoCount :number = 0;
   page: number = 1;
-  pageSize: number=5;
-  totalPages:number=1;
+  pageSize: number = 10;
+  totalPages:number = 1;
 
   constructor(private photoService:PhotoService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    if (this.photos==null||this.photos.length==0)
+    if (location.pathname == '/photos')
       this.getPhotos();
+  }
+
+  ngOnChanges(){
+    this.getPhotosByAlbumId()
   }
 
   reloadPhotoListAfterAdd(addedFilesCount:number):void{
     this.photoCount = this.photoCount + addedFilesCount;
     this.totalPages = Math.ceil(this.photoCount / this.pageSize);
     this.page = this.totalPages;
-    this.getPhotos();
+    this.refreshPhotoPage();
   }
 
   photo_url(data: Photo):SafeResourceUrl{
@@ -40,43 +45,51 @@ export class PhotosComponent implements OnInit {
 
   getPhotos():void{
     this.loadedData = true;
-    this.photoService.getPhotos(this.page, this.pageSize).subscribe((pageOfFoto: PageOfFoto | any) =>{
-      if (pageOfFoto==null || this.photos==null){
+    this.photoService.getPhotos(this.page, this.pageSize).subscribe((pageOfFoto: any) =>{
+      if (pageOfFoto==null){
         this.photoCount = 0;
         this.totalPages = 0;
       }else{
         this.loadedData = false;
-        this.photos = pageOfFoto?.photos;
-        this.photoCount = pageOfFoto.count;
+        this.photos = pageOfFoto?.data;
+        this.photoCount = pageOfFoto.totalCount;
         this.totalPages = Math.ceil(this.photoCount / this.pageSize);
-        for(let i=0; i<this.photos.length;i++){
-          this.photoService.getPhoto(this.photos[i].id)
-            .subscribe(photo =>{
-              this.photos[i].photoData = photo.photoData;
-              if (i==0){
-                this.selectedImageSource = this.photo_url(this.photos[i]);
-              }
-            });
-        }
+        this.getBinaryDataForPhotos();
       }
     });
   }
 
-  nextPage(){
-    if(this.page<this.totalPages){
-      this.selectedImageSource=""; 
-      this.page++;
-      this.getPhotos();
+  getBinaryDataForPhotos(){
+    for(let i=0; i<this.photos.length;i++){
+      this.photoService.getPhoto(this.photos[i].id)
+        .subscribe(photo =>{
+          if (photo!=null){
+            this.photos[i].photoData = photo.photoData;
+            if (i==0){
+              this.selectedImageSource = this.photo_url(this.photos[i]);
+            }
+          }
+        });
     }
   }
 
-  previousPage(){
-    if(this.page>1){
-      this.selectedImageSource=""; 
-      this.page--;
-      this.getPhotos();
-    }
+  getPhotosByAlbumId(){
+    this.loadedData = true;
+    this.photoService.getPhotosByAlbumId(this.page, this.pageSize, this.selectedAlbumID).subscribe((pageOfFoto: any) =>{
+      if (pageOfFoto==null){
+        this.photoCount = 0;
+        this.totalPages = 0;
+      }else{
+        this.loadedData = false;
+        this.photos = pageOfFoto?.data;
+        this.photoCount = pageOfFoto.totalCount;
+        this.totalPages = Math.ceil(this.photoCount / this.pageSize);
+        this.getBinaryDataForPhotos();
+      }
+    });
   }
+
+
 
   showSelectedPhoto(data:Photo):void{
     this.selectedImageSource = this.photo_url(data);
@@ -92,7 +105,7 @@ export class PhotosComponent implements OnInit {
           if (this.page>this.totalPages){
             this.page--;
           }
-          this.getPhotos();
+          this.refreshPhotoPage();
         }else
           alert("Cann't delete photo")
 
@@ -102,11 +115,42 @@ export class PhotosComponent implements OnInit {
 
   onLastPageClick(){
     this.page = this.totalPages;
-    this.getPhotos();
+    this.refreshPhotoPage();
   }
 
   onFirstPageClick(){
     this.page = 1;
-    this.getPhotos();
+    this.refreshPhotoPage();
   }
+
+  nextPage(){
+    if(this.page<this.totalPages){
+      this.selectedImageSource=""; 
+      this.page++;
+      this.refreshPhotoPage();
+    }
+  }
+
+  previousPage(){
+    if(this.page>1){
+      this.selectedImageSource=""; 
+      this.page--;
+      this.refreshPhotoPage();
+    }
+  }
+
+  pageNumber(i:number){
+    this.page = i+1;
+    this.refreshPhotoPage();
+  }
+
+  refreshPhotoPage(){
+    if (location.pathname == '/photos')
+      this.getPhotos();
+    else{
+      if (location.pathname == '/albums')
+        this.getPhotosByAlbumId();
+    }
+  }
+  
 }

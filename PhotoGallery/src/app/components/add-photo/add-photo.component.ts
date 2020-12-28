@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Photo} from '../../models/photo'
 import {PhotoService} from '../../services/photo.service'
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { CreatePhotoResult } from 'src/app/models/createPhotoResult';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-add-photo',
@@ -12,12 +11,18 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class AddPhotoComponent implements OnInit {
   @Output() fileIsUploadedOnServerEvent = new EventEmitter<number>();
+  @Input() selectedAlbumID:any = '00000000-0000-0000-0000-000000000000';
+  
   errors:any =[];
   addedFilesCount:number=0
 
   constructor(private photoService:PhotoService) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges(){
+    
   }
 
   onFileSelected(event:any){
@@ -32,18 +37,17 @@ export class AddPhotoComponent implements OnInit {
         data.append('Files', event.target.files[0]);   
     }
 
-    this.photoService.addPhoto(data).subscribe((result : CreatePhotoResult) => {
-      if (result!=null){
-        if(result.errors.length>0){
-          alert(result.errors);
-          this.errors = result.errors;
-        }
-        this.addedFilesCount = result.guids.length;
+    data.append("AlbumId", this.selectedAlbumID);
 
-        this.fileIsUploadedOnServerEvent.emit( this.addedFilesCount);
+    this.photoService.addPhoto(data).subscribe((result : any) => {
+      if (result!=null){
+        if(result.length>0){
+          this.addedFilesCount = result.length;
+          this.fileIsUploadedOnServerEvent.emit( this.addedFilesCount);
+        }
       }
       else{
-        this.errors = "Failed to add images.";
+        this.errors = alert("Failed to add images.");
       }
     });
   }

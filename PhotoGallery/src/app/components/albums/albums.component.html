@@ -1,1 +1,19 @@
-<p>albums works!</p>
+<div class="wrapper">
+    <div class="block_left">
+        <button>Add</button>
+        <div class="list-group">
+            <a  class="list-group-item list-group-item-action" [ngClass]="{'active': selectedAlbumId == '00000000-0000-0000-0000-000000000000'}" (click)="listAlbumsClick($event, '00000000-0000-0000-0000-000000000000')">
+              Without Album 
+            </a>
+            <a  class="list-group-item list-group-item-action" [ngClass]="{'active': selectedAlbumId == album.id}" (click)="listAlbumsClick($event, album.id)" *ngFor="let album of albums">
+                {{ album.title }} 
+                    <button class="btn btn-primary">Edit</button>
+                    <button class="btn btn-danger" (click)="deleteAlbumById(album.id)">X</button>
+              </a>
+
+          </div>
+    </div>
+    <div class="block_center">
+        <app-photos [selectedAlbumID]="selectedAlbumId"></app-photos>
+    </div>
+</div>
