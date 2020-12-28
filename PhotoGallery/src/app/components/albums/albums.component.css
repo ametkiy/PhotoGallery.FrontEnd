@@ -27,3 +27,7 @@
 .btn.btn-info{
   margin-left: 10px;
 }
+
+.btn.btn-info.add{
+  margin: 10px;
+}

@@ -30,8 +30,10 @@
                     <div class="card-body">
                     <h5 class="card-title">{{photo.fileName}}</h5>
                     <p class="card-text">{{photo.description}}</p>
-                    <a routerLink="/detail/{{photo.id}}" class="btn btn-primary">Edit</a>
-                    <button class="btn btn-danger" (click)="deletePhotoById(photo)">X</button>
+                    <div class="d-flex justify-content-center">
+                        <a routerLink="/detail/{{photo.id}}" class="btn btn-primary">Edit</a>
+                        <button class="btn btn-danger" (click)="deletePhotoById(photo)">X</button>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -41,8 +43,10 @@
                     <div class="card-body">
                     <h5 class="card-title">{{photo.fileName}}</h5>
                     <p class="card-text">{{photo.description}}</p>
-                    <a routerLink="/detail/{{photo.id}}" class="btn btn-primary">Edit</a>
-                    <button class="btn btn-danger" (click)="deletePhotoById(photo)">X</button>
+                    <div class="d-flex justify-content-center">
+                        <a routerLink="/detail/{{photo.id}}" class="btn btn-primary">Edit</a>
+                        <button class="btn btn-danger" (click)="deletePhotoById(photo)">X</button>
+                    </div>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,8 @@
 <div class="wrapper">
     <div class="block_left">
-        <button class="btn btn-info"  (click)="addAlbum()">Add</button>
+        <div class="d-flex justify-content-center">
+            <button class="btn btn-info add"  (click)="addAlbum()">Add New Album</button>
+        </div>
         <div class="list-group">
             <a  class="list-group-item list-group-item-action" [ngClass]="{'active': selectedAlbumId == '00000000-0000-0000-0000-000000000000'}" (click)="listAlbumsClick($event, '00000000-0000-0000-0000-000000000000')">
               Without Album 
