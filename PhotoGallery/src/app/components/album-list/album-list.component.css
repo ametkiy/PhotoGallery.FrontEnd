@@ -24,3 +24,7 @@
 .selectControl{
     vertical-align: middle;
 }
+
+.browser-default.custom-select{
+    min-width: 250px;
+}

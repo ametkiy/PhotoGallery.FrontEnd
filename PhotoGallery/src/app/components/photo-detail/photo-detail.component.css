@@ -4,6 +4,7 @@
   height: 60px;
   min-width: 50px;
   width: 100%;
+  min-width: 720px;
 }
 
 .imgBox{

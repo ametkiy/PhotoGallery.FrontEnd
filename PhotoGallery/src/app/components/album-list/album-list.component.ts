@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { Album } from 'src/app/models/album';
 import { AlbumService } from 'src/app/services/album.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EditAlbumComponent } from '../edit-album/edit-album.component'
 
 @Component({
   selector: 'app-album-list',
@@ -10,11 +12,11 @@ import { AlbumService } from 'src/app/services/album.service';
 })
 export class AlbumListComponent implements OnInit {
   albums:Album[] = [];
-  startedAddAlbum : boolean = false;
   @Input() selectedAlbum!:any;
   @Output() newSelectedAlbumEvent = new EventEmitter<any>();
 
-  constructor(private albumService:AlbumService) { }
+  constructor(private albumService:AlbumService,
+    private dialog:MatDialog) { }
 
   ngOnInit(): void {
     this.getAlbums();
@@ -35,26 +37,28 @@ export class AlbumListComponent implements OnInit {
   }
 
   startAddAlbum(){
-    this.startedAddAlbum = true;
+    this.showEditForm(new Album());
   }
 
-  addAlbum(value:string){
-    if (value!=null && value!=""){
-      let album = new Album();
-      album.title = value;
-      this.albumService.addAlbum(album).subscribe((result : any) => {
-        if (result!=null){
-          this.selectedAlbum = result;
-          this.getAlbums();
-          this.startedAddAlbum = false;
-        }
-        else{
-          alert("Cann't add new album");
-        }
-      });
-    }else{
-      this.startedAddAlbum = false;
-    }
+  editAlbum(){
+    let item = this.albums.filter(item => item.id === this.selectedAlbum)[0];
+    this.showEditForm(item);
+  }
+
+  showEditForm(album:Album){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = "70%";
+    dialogConfig.data = {editAlbum:album};
+
+    let dialogRef = this.dialog.open(EditAlbumComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result!=null){
+        this.selectedAlbum = result;
+        this.getAlbums();
+      }
+    });
   }
 
   deleteAlbum(){

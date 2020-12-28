@@ -19,3 +19,11 @@
   margin-left: 5px;
   max-width: 80%;
 }
+
+.btn.btn-danger{
+  margin-left: 10px;
+}
+
+.btn.btn-info{
+  margin-left: 10px;
+}

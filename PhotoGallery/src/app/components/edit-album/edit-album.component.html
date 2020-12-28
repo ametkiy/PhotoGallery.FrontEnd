@@ -1,0 +1,13 @@
+
+<div class="form-group">
+    <label for="albumTitle">Title</label>
+    <input #albumTitle type="text" class="form-control" id="albumTitle" placeholder="Title" required value="{{album.title}}">
+</div>
+<div class="form-group">
+    <label for="albumDescription">Description</label>
+    <textarea #albumDescription class="form-control" id="albumDescription" rows="3" >{{album.description}}</textarea>
+</div>
+<div class="d-flex justify-content-end">
+    <button type="submit" class="btn btn-success" (click)="onSubmit(albumTitle.value, albumDescription.value)">Submit</button>
+    <button class="btn btn-light" (click)="onClickClose()">Cancel</button>
+</div>
