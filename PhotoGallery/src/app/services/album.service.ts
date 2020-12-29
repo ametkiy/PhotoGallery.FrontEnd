@@ -4,13 +4,14 @@ import { of } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {catchError,map,tap} from 'rxjs/operators'
 import { Album } from '../models/album';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlbumService {
 
-  private albumUrl :string ="https://localhost:44319/api/album";
+  private albumUrl :string = environment.apiUrl + "album";
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE' 

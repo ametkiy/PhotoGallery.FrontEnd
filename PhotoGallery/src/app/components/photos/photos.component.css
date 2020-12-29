@@ -28,5 +28,12 @@
     text-overflow: ellipsis ;
     white-space: nowrap; 
     overflow: hidden;
+    min-height: 24px;
+}
+
+.card-title{
+    text-overflow: ellipsis ;
+    white-space: nowrap; 
+    overflow: hidden; 
 }
 

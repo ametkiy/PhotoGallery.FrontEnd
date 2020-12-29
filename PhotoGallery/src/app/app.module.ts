@@ -41,6 +41,6 @@ import { ImagePreviewComponent } from './components/image-preview/image-preview.
     PhotoService
   ],
   bootstrap: [AppComponent],
-  entryComponents:[EditAlbumComponent, ImagePreviewComponent]
+  entryComponents:[PhotoDetailComponent, EditAlbumComponent, ImagePreviewComponent]
 })
 export class AppModule { }

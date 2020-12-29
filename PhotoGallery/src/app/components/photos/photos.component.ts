@@ -4,6 +4,7 @@ import { PhotoService} from '../../services/photo.service'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ImagePreviewComponent } from '../image-preview/image-preview.component';
+import { PhotoDetailComponent } from '../photo-detail/photo-detail.component';
 
 @Component({
   selector: 'app-photos',
@@ -162,6 +163,21 @@ export class PhotosComponent implements OnInit {
     let dialogRef = this.dialog.open(ImagePreviewComponent, dialogConfig);
     //dialogRef.afterClosed().subscribe(result => {
     //});
+  }
+
+  showDitailForm(id:string){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {id:id};
+
+    let dialogRef = this.dialog.open(PhotoDetailComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (location.pathname == '/albums' && result)
+        this.getPhotosByAlbumId();
+      if (location.pathname == '/photos' && result)
+        this.getPhotos();
+    });
   }
 
 }

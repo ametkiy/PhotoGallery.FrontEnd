@@ -9,6 +9,7 @@
 
 .imgBox{
     width: 720px;
+    max-height: 50vh;
     margin: 20px auto 20px;
 }
 
