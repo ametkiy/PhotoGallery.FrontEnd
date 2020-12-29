@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Photo} from '../../models/photo'
 import { PhotoService} from '../../services/photo.service'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { PageOfFoto } from 'src/app/models/pageOfPhotos';
-
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ImagePreviewComponent } from '../image-preview/image-preview.component';
 
 @Component({
   selector: 'app-photos',
@@ -21,7 +21,9 @@ export class PhotosComponent implements OnInit {
   pageSize: number = 10;
   totalPages:number = 1;
 
-  constructor(private photoService:PhotoService, private sanitizer: DomSanitizer) { }
+  constructor(private photoService:PhotoService, 
+    private sanitizer: DomSanitizer, 
+    private dialog:MatDialog) { }
 
   ngOnInit(): void {
     if (location.pathname == '/photos')
@@ -54,7 +56,8 @@ export class PhotosComponent implements OnInit {
         this.photos = pageOfFoto?.data;
         this.photoCount = pageOfFoto.totalCount;
         this.totalPages = Math.ceil(this.photoCount / this.pageSize);
-        this.getBinaryDataForPhotos();
+        if(this.photos!=null && this.photos.length>0)
+          this.getBinaryDataForPhotos();
       }
     });
   }
@@ -84,16 +87,12 @@ export class PhotosComponent implements OnInit {
         this.photos = pageOfFoto?.data;
         this.photoCount = pageOfFoto.totalCount;
         this.totalPages = Math.ceil(this.photoCount / this.pageSize);
-        this.getBinaryDataForPhotos();
+        if(this.photos!=null && this.photos.length>0)
+          this.getBinaryDataForPhotos();
       }
     });
   }
 
-
-
-  showSelectedPhoto(data:Photo):void{
-    this.selectedImageSource = this.photo_url(data);
-  }
 
   deletePhotoById(photo:Photo){
     if(confirm("Are you sure to delete this file: "+photo.fileName)) {
@@ -153,4 +152,16 @@ export class PhotosComponent implements OnInit {
     }
   }
   
+  showImagePreview(url:SafeResourceUrl){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    //dialogConfig.width = "70%";
+    dialogConfig.data = {url:url};
+
+    let dialogRef = this.dialog.open(ImagePreviewComponent, dialogConfig);
+    //dialogRef.afterClosed().subscribe(result => {
+    //});
+  }
+
 }

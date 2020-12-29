@@ -14,7 +14,8 @@ import { PhotoService } from '../app/services/photo.service';
 import { AddPhotoComponent } from './components/add-photo/add-photo.component';
 import { AlbumListComponent } from './components/album-list/album-list.component';
 import { AlbumsComponent } from './components/albums/albums.component';
-import { EditAlbumComponent } from './components/edit-album/edit-album.component'
+import { EditAlbumComponent } from './components/edit-album/edit-album.component';
+import { ImagePreviewComponent } from './components/image-preview/image-preview.component'
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { EditAlbumComponent } from './components/edit-album/edit-album.component
     AddPhotoComponent,
     AlbumListComponent,
     AlbumsComponent,
-    EditAlbumComponent
+    EditAlbumComponent,
+    ImagePreviewComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,6 @@ import { EditAlbumComponent } from './components/edit-album/edit-album.component
     PhotoService
   ],
   bootstrap: [AppComponent],
-  entryComponents:[EditAlbumComponent]
+  entryComponents:[EditAlbumComponent, ImagePreviewComponent]
 })
 export class AppModule { }

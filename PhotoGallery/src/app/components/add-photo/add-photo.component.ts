@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Photo} from '../../models/photo'
 import {PhotoService} from '../../services/photo.service'
 import { SafeResourceUrl } from '@angular/platform-browser';
-import { CreatePhotoResult } from 'src/app/models/createPhotoResult';
 
 @Component({
   selector: 'app-add-photo',

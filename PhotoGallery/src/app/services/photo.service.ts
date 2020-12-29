@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Photo} from '../models/photo'
-import { PageOfFoto} from '../models/pageOfPhotos'
 import { Observable, from } from 'rxjs'
 import { of } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {catchError,map,tap} from 'rxjs/operators'
-import { CreatePhotoResult } from '../models/createPhotoResult';
 
 @Injectable({
   providedIn: 'root'
@@ -35,10 +33,9 @@ export class PhotoService {
     return result;
   }
 
-  getPhotosByAlbumId(page:number, pageSize:number, albumId:any): Observable<PageOfFoto| never[]>{
-    //https://localhost:44319/api/photo/GetPaginationPhotos?page=3&pageSize=5
+  getPhotosByAlbumId(page:number, pageSize:number, albumId:any): Observable<any| never[]>{
     const url = `${this.photoUrl}/GetByAlbumId/${albumId}?page=${page}&pageSize=${pageSize}`;
-    let result = this.http.get<PageOfFoto| never[]>(url).pipe(
+    let result = this.http.get<any| never[]>(url).pipe(
       tap(()=>console.info('Fetched photos')),
       catchError(this.handleError('getPhotos',[]))
     );

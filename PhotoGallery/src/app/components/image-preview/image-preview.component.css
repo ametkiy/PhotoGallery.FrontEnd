@@ -1,0 +1,11 @@
+.image-container{
+    margin: 5px;
+    max-height: 90vh;
+    max-width: 100%;
+    display:flex;
+}
+
+.image{
+    overflow: hidden;
+    object-fit:contain;
+}
