@@ -13,18 +13,18 @@
     <div class="d-flex justify-content-center navigation">
         <nav aria-label="Page navigation example" *ngIf="photoCount>0">
             <ul class="pagination">
-            <li class="page-item " [class.disabled]="disabledFirstPreviousPage()"><a class="page-link" (click)="onFirstPageClick()">First</a></li>
-            <li class="page-item" [class.disabled]="disabledFirstPreviousPage()"><a class="page-link" (click)="previousPage()">Previous</a></li>
-            <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="isActivePage(i+1)"><a class="page-link" (click)="pageNumber(i)">{{i+1}}</a></li>
-            <li class="page-item" [class.disabled]="disabledNextLastPage()"><a class="page-link" (click)="nextPage()">Next</a></li>
-            <li class="page-item" [class.disabled]="disabledNextLastPage()"><a class="page-link" (click)="onLastPageClick()">Last</a></li>
+                <li class="page-item " [class.disabled]="disabledFirstPreviousPage()"><a class="page-link" (click)="onFirstPageClick()">First</a></li>
+                <li class="page-item" [class.disabled]="disabledFirstPreviousPage()"><a class="page-link" (click)="previousPage()">Previous</a></li>
+                <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index" [class.active]="isActivePage(i+1)"><a class="page-link" (click)="pageNumber(i)">{{i+1}}</a></li>
+                <li class="page-item" [class.disabled]="disabledNextLastPage()"><a class="page-link" (click)="nextPage()">Next</a></li>
+                <li class="page-item" [class.disabled]="disabledNextLastPage()"><a class="page-link" (click)="onLastPageClick()">Last</a></li>
             </ul>
         </nav>    
     </div>
     <div class="d-flex justify-content-center">
-        <div class="column">
-            <div class="row">
-                <div class="card" style="width: 18rem;" *ngFor="let photo of photos | slice:0:5; let i=index">
+        <ul class="ulgrid">
+            <li class="liCard" *ngFor="let photo of photos | slice:0:10; let i=index">   
+                <div class="card" style="width: 18rem;">
                     <div class="d-flex justify-content-center"  *ngIf="!photo.photoData">
                         <div class="spinner-border text-primary" role="status">
                             <span class="sr-only"></span>
@@ -42,28 +42,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="card" style="width: 18rem;" *ngFor="let photo of photos |  slice:5:10; let i=index">
-                    <div class="d-flex justify-content-center"  *ngIf="!photo.photoData">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="sr-only"></span>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-center image-container">
-                        <img [src]=photo_url(photo) class="card-img-top" *ngIf="photo.photoData" (click)="showImagePreview(photo_url(photo))">
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title" data-toggle="tooltip" title="{{photo.fileName}}">{{photo.fileName}}</h5>
-                        <p class="card-text" data-toggle="tooltip" title="{{photo.description}}">{{photo.description}} </p>
-                        <div class="d-flex justify-content-center">
-                            <a (click)="showDitailForm(i)" class="btn btn-primary">Edit</a>
-                            <button class="btn btn-danger" (click)="deletePhotoById(photo)">X</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            </li> 
+        </ul>
     </div>
 
 </ng-template>

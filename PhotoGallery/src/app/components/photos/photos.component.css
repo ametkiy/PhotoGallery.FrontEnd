@@ -4,13 +4,13 @@
 
 .image-container{
     margin: 5px;
-    height:  200px;
-    width: 250px;
+
     display:flex;
 }
 
 .card-img-top{
-    height:auto;
+    height:  200px ;
+    width: 250px;
     object-fit:scale-down;
     max-width:100%
 }
@@ -35,5 +35,16 @@
     text-overflow: ellipsis ;
     white-space: nowrap; 
     overflow: hidden; 
+    margin-bottom: 1px;
+}
+
+.ulgrid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 3px;
+}
+
+.liCard {
+    list-style-type: none; 
 }
 

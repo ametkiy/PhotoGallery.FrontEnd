@@ -25,7 +25,6 @@ export class AlbumListComponent implements OnInit {
   getAlbums() {
     this.albumService.getAlbums().subscribe((albums: Album[] | any) =>{
       this.albums = albums;
-      var tmp= this.selectedAlbum;
     });
   }
 
@@ -56,6 +55,7 @@ export class AlbumListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result!=null){
         this.selectedAlbum = result;
+        this.newSelectedAlbumEvent.emit(this.selectedAlbum);
         this.getAlbums();
       }
     });
@@ -66,6 +66,7 @@ export class AlbumListComponent implements OnInit {
       this.albumService.deleteAlbum(this.selectedAlbum).subscribe((response) => {
         if(response == this.selectedAlbum ){
           this.selectedAlbum=null; 
+          this.newSelectedAlbumEvent.emit(this.selectedAlbum);
           this.getAlbums();
         }else{
           alert("Cann't delete album");
