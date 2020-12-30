@@ -13,8 +13,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./photo-detail.component.css']
 })
 export class PhotoDetailComponent implements OnInit {
-  selectedImageSource!: SafeResourceUrl | undefined;
-  photo!: Photo ;
   buttonUptateIsPressed:boolean = false;
 
   constructor(
@@ -23,30 +21,22 @@ export class PhotoDetailComponent implements OnInit {
     private photoService:PhotoService,
     private sanitizer: DomSanitizer,
     private dialogBox:MatDialogRef<PhotoDetailComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {id: string}) { }
+    @Inject(MAT_DIALOG_DATA) public data: {photo: Photo}) { }
 
   ngOnInit(): void {
-    let id ;
-    if (this.data.id!=null){
-      id = this.data.id;
-      this.photoService.getPhoto(id)
-        .subscribe(photo =>{
-          this.photo = photo;
-      });
-    }
-    else{
-      alert('Id is empty');
-      this.goBack();
-    }
+
   }
 
   goBack():void{
-    this.dialogBox.close(this.buttonUptateIsPressed);
+    if(this.buttonUptateIsPressed)
+      this.dialogBox.close(this.data.photo);
+    else
+      this.dialogBox.close(null);
   }
 
   saveDescriptions(){
-    this.photoService.updatePhoto(this.photo!).subscribe((id:any) => {
-      if (id!=null && id == this.photo.id)
+    this.photoService.updatePhoto(this.data.photo).subscribe((id:any) => {
+      if (id!=null && id == this.data.photo.id)
         alert('Update compleate');
       else
         alert('An error occurred while editing');
@@ -59,7 +49,7 @@ export class PhotoDetailComponent implements OnInit {
   }
 
   albumChengedEvent(value:any){
-    this.photo.albumId = value;
+    this.data.photo.albumId = value;
   }
 
 }

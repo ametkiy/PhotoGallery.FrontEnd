@@ -1,24 +1,24 @@
 
 
 <div class="d-flex justify-content-center">
-    <div *ngIf="photo" class="form-group">
-        <h3>{{photo.fileName | uppercase}}</h3>
+    <div class="form-group">
+        <h3>{{data.photo.fileName | uppercase}}</h3>
         <div>
-            <span>id: </span>{{photo.id}}
+            <span>id: </span>{{data.photo.id}}
         </div>
         <div>
-            <span>File name: </span>{{photo.fileName}}
+            <span>File name: </span>{{data.photo.fileName}}
         </div>
         <div>
-            <span>Add date: </span>{{photo.addDate | date:'dd-MM-yyyy HH:mm:ss'}}
+            <span>Add date: </span>{{data.photo.addDate | date:'dd-MM-yyyy HH:mm:ss'}}
         </div>
         <div>
-            <app-album-list [selectedAlbum]="photo.albumId" (newSelectedAlbumEvent)="albumChengedEvent($event)"></app-album-list>
+            <app-album-list [selectedAlbum]="data.photo.albumId" (newSelectedAlbumEvent)="albumChengedEvent($event)"></app-album-list>
         </div>
         <div>
             <label>
                 Description:
-                <textarea class="description" [(ngModel)] = "photo.description" placeholder="Description" rows="4"></textarea>
+                <textarea class="description" [(ngModel)] = "data.photo.description" placeholder="Description" rows="4"></textarea>
             </label>
             <div class="container">
                 <div class="center">
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="imgBox">
-                <img [src]=photo_url(photo) />
+                <img [src]=photo_url(data.photo) />
             </div>
         </div>
     </div>

@@ -4,12 +4,13 @@ import { Observable, from } from 'rxjs'
 import { of } from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http'
 import {catchError,map,tap} from 'rxjs/operators'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PhotoService {
-  private photoUrl :string ="https://localhost:44319/api/photo"; 
+  private photoUrl :string = environment.apiUrl + "photo"; 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE' 

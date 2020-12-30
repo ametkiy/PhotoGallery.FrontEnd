@@ -165,19 +165,30 @@ export class PhotosComponent implements OnInit {
     //});
   }
 
-  showDitailForm(id:string){
+  showDitailForm(index:number){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {id:id};
+    dialogConfig.data = {photo:this.photos[index]};
 
     let dialogRef = this.dialog.open(PhotoDetailComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-      if (location.pathname == '/albums' && result)
+      if (location.pathname == '/albums' && result!=null && this.photos[index].albumId != this.selectedAlbumID){
         this.getPhotosByAlbumId();
-      if (location.pathname == '/photos' && result)
-        this.getPhotos();
+      }
     });
   }
 
+  isActivePage(i:number):boolean{
+    let result = i==this.page;
+    return result;
+  }
+
+  disabledFirstPreviousPage():boolean{
+    return this.page==1;
+  }
+
+  disabledNextLastPage():boolean{
+    return this.page == this.totalPages;
+  }
 }
