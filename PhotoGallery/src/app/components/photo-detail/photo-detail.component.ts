@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit } from '@angular/core';
 import {Photo} from '../../models/photo'
 
 import {ActivatedRoute} from '@angular/router'
@@ -14,6 +14,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class PhotoDetailComponent implements OnInit {
   buttonUptateIsPressed:boolean = false;
+  onChangedAlbumList = new EventEmitter();
+  photo:Photo= new Photo();
 
   constructor(
     private activeteRoute:ActivatedRoute,
@@ -24,7 +26,7 @@ export class PhotoDetailComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {photo: Photo}) { }
 
   ngOnInit(): void {
-
+    this.photo = Object.assign({}, this.data.photo);
   }
 
   goBack():void{
@@ -34,10 +36,12 @@ export class PhotoDetailComponent implements OnInit {
       this.dialogBox.close(null);
   }
 
-  saveDescriptions(){
-    this.photoService.updatePhoto(this.data.photo).subscribe((id:any) => {
-      if (id!=null && id == this.data.photo.id)
+  saveChangedInPhoto(){
+    this.photoService.updatePhoto(this.photo).subscribe((id:any) => {
+      if (id!=null && id == this.data.photo.id){
+        this.data.photo = Object.assign({}, this.photo);
         alert('Update compleate');
+      }
       else
         alert('An error occurred while editing');
         this.buttonUptateIsPressed = true;
@@ -49,7 +53,9 @@ export class PhotoDetailComponent implements OnInit {
   }
 
   albumChengedEvent(value:any){
-    this.data.photo.albumId = value;
+    if (value!=null)
+      this.photo.albumId = value;
+    this.onChangedAlbumList.emit();
   }
 
 }

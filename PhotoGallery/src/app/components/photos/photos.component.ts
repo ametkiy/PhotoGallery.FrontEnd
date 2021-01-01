@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Photo} from '../../models/photo'
 import { PhotoService} from '../../services/photo.service'
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -13,6 +13,8 @@ import { PhotoDetailComponent } from '../photo-detail/photo-detail.component';
 })
 export class PhotosComponent implements OnInit {
   @Input() selectedAlbumID:any = '00000000-0000-0000-0000-000000000000';
+  @Output() updateAlbumList = new EventEmitter();
+
   selectedImageSource!: SafeResourceUrl | undefined;
   photos:Photo[] = [];
   selectedPhoto:Photo|undefined;
@@ -157,12 +159,9 @@ export class PhotosComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    //dialogConfig.width = "70%";
     dialogConfig.data = {url:url};
 
     let dialogRef = this.dialog.open(ImagePreviewComponent, dialogConfig);
-    //dialogRef.afterClosed().subscribe(result => {
-    //});
   }
 
   showDitailForm(index:number){
@@ -176,6 +175,10 @@ export class PhotosComponent implements OnInit {
       if (location.pathname == '/albums' && result!=null && this.photos[index].albumId != this.selectedAlbumID){
         this.getPhotosByAlbumId();
       }
+    });
+
+    const sub = dialogRef.componentInstance.onChangedAlbumList.subscribe(() => {
+      this.updateAlbumList.emit();
     });
   }
 

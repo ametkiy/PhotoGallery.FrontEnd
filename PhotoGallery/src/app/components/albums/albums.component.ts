@@ -66,4 +66,8 @@ export class AlbumsComponent implements OnInit {
     });
   }
 
+  updateAlbumList(){
+    this.getAlbums();
+  }
+
 }
