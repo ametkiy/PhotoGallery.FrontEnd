@@ -174,6 +174,9 @@ export class PhotosComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (location.pathname == '/albums' && result!=null && this.photos[index].albumId != this.selectedAlbumID){
         this.getPhotosByAlbumId();
+      }else{
+        this.photos[index].albumId = result.albumId;
+        this.photos[index].description = result.description;
       }
     });
 

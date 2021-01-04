@@ -19,6 +19,7 @@ export class AlbumListComponent implements OnInit {
     private dialog:MatDialog) { }
 
   ngOnInit(): void {
+    let tmp = this.selectedAlbum;
     this.getAlbums();
   }
 

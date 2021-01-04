@@ -53,8 +53,7 @@ export class PhotoDetailComponent implements OnInit {
   }
 
   albumChengedEvent(value:any){
-    if (value!=null)
-      this.photo.albumId = value;
+    this.photo.albumId = value;
     this.onChangedAlbumList.emit();
   }
 

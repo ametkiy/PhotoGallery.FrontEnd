@@ -11,7 +11,7 @@
 <ng-template #elseBlock>
     <div *ngIf="photoCount<1" class="d-flex justify-content-center"> No photo </div>
     <div class="d-flex justify-content-center navigation">
-        <nav aria-label="Page navigation example" *ngIf="photoCount>0">
+        <nav aria-label="Page navigation example" *ngIf="photoCount>0 && totalPages > 1">
             <ul class="pagination">
                 <li class="page-item " [class.disabled]="disabledFirstPreviousPage()"><a class="page-link" (click)="onFirstPageClick()">First</a></li>
                 <li class="page-item" [class.disabled]="disabledFirstPreviousPage()"><a class="page-link" (click)="previousPage()">Previous</a></li>
