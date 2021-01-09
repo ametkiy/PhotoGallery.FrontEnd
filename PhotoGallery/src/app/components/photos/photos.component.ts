@@ -70,6 +70,7 @@ export class PhotosComponent implements OnInit {
       this.photoService.getPhoto(this.photos[i].id)
         .subscribe(photo =>{
           if (photo!=null){
+            this.photos[i].tags = photo.tags;
             this.photos[i].photoData = photo.photoData;
             if (i==0){
               this.selectedImageSource = this.photo_url(this.photos[i]);
@@ -177,6 +178,7 @@ export class PhotosComponent implements OnInit {
       }else{
         this.photos[index].albumId = result.albumId;
         this.photos[index].description = result.description;
+        this.photos[index].tags = result.tags;
       }
     });
 

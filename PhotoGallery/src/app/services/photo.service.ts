@@ -68,7 +68,7 @@ export class PhotoService {
     );
   }
 
-  deletePhoto(id:number): Observable<any>{
+  deletePhoto(id:string): Observable<any>{
     const url = `${this.photoUrl}/${id}`;
     return this.http.delete<Photo>(url).pipe(
       tap((deletedId: any)=> console.info(`Deleting photo with id=${deletedId} completed`)),

@@ -2,9 +2,15 @@
   padding-bottom:10px ;
   font-size:14px;
   height: 60px;
+  min-height: 50px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.textTags{
   min-width: 50px;
   width: 100%;
-  min-width: 720px;
+  max-width: 720px;  
 }
 
 .imgBox{
