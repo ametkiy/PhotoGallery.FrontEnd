@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ImagePreviewComponent } from '../image-preview/image-preview.component';
 import { PhotoDetailComponent } from '../photo-detail/photo-detail.component';
+import { AlbumService } from 'src/app/services/album.service';
 
 @Component({
   selector: 'app-photos',
@@ -24,7 +25,7 @@ export class PhotosComponent implements OnInit {
   pageSize: number = 10;
   totalPages:number = 1;
 
-  constructor(private photoService:PhotoService, 
+  constructor(private photoService:PhotoService, private albumService:AlbumService,
     private sanitizer: DomSanitizer, 
     private dialog:MatDialog) { }
 
@@ -70,6 +71,7 @@ export class PhotosComponent implements OnInit {
       this.photoService.getPhoto(this.photos[i].id)
         .subscribe(photo =>{
           if (photo!=null){
+            this.photos[i].tags = photo.tags;
             this.photos[i].photoData = photo.photoData;
             if (i==0){
               this.selectedImageSource = this.photo_url(this.photos[i]);
@@ -81,7 +83,7 @@ export class PhotosComponent implements OnInit {
 
   getPhotosByAlbumId(){
     this.loadedData = true;
-    this.photoService.getPhotosByAlbumId(this.page, this.pageSize, this.selectedAlbumID).subscribe((pageOfFoto: any) =>{
+    this.albumService.getPhotosByAlbumId(this.page, this.pageSize, this.selectedAlbumID).subscribe((pageOfFoto: any) =>{
       if (pageOfFoto==null){
         this.photoCount = 0;
         this.totalPages = 0;
@@ -172,11 +174,13 @@ export class PhotosComponent implements OnInit {
 
     let dialogRef = this.dialog.open(PhotoDetailComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
+      if (result==null) return;
       if (location.pathname == '/albums' && result!=null && this.photos[index].albumId != this.selectedAlbumID){
         this.getPhotosByAlbumId();
       }else{
         this.photos[index].albumId = result.albumId;
         this.photos[index].description = result.description;
+        this.photos[index].tags = result.tags;
       }
     });
 

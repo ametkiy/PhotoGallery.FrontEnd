@@ -16,10 +16,19 @@
             <app-album-list [selectedAlbum]="photo.albumId" (newSelectedAlbumEvent)="albumChengedEvent($event)"></app-album-list>
         </div>
         <div>
-            <label>
-                Description:
-                <textarea class="description" [(ngModel)] = "photo.description" placeholder="Description" rows="4"></textarea>
-            </label>
+            <span>
+                Tags:
+            </span><br>
+            <input type="text" class="textTags" placeholder="Tags" [(ngModel)] = "photo.tags"><br>
+            <small id="tagsHelp" class="form-text text-muted">The semicolon (;) serves as a separator between tags.</small>
+        </div>
+        <div>
+            <div>
+                <label style="width: 100%;">
+                    Description:
+                    <textarea class="description" [(ngModel)] = "photo.description" placeholder="Description" rows="4"></textarea>
+                </label>               
+            </div>
             <div class="container">
                 <div class="center">
                 <button (click)="saveChangedInPhoto()" class="btn btn-success">Update Description</button>

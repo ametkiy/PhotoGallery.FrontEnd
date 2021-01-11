@@ -26,7 +26,7 @@ export class PhotoService {
   }
 
   getPhotos(page:number, pageSize:number): Observable<any>{
-    const url = `${this.photoUrl}/GetPaginationPhotos?page=${page}&pageSize=${pageSize}`;
+    const url = `${this.photoUrl}s?page=${page}&pageSize=${pageSize}`;
     let result = this.http.get<any>(url).pipe(
       tap(()=>console.info('Fetched photos')),
       catchError(this.handleError('getPhotos',[]))
@@ -34,17 +34,8 @@ export class PhotoService {
     return result;
   }
 
-  getPhotosByAlbumId(page:number, pageSize:number, albumId:any): Observable<any| never[]>{
-    const url = `${this.photoUrl}/GetByAlbumId/${albumId}?page=${page}&pageSize=${pageSize}`;
-    let result = this.http.get<any| never[]>(url).pipe(
-      tap(()=>console.info('Fetched photos')),
-      catchError(this.handleError('getPhotos',[]))
-    );
-    return result;
-  }
-
   getPhoto(id: any): Observable<Photo> {
-    const url = `${this.photoUrl}/GetById/${id}`;
+    const url = `${this.photoUrl}/${id}`;
     let result = this.http.get<Photo>(url).pipe(
       tap(()=>console.info(`Fetched photo id=${id}`)),
       catchError(this.handleError<Photo>(`getPhoto id=${id}`))
@@ -68,7 +59,7 @@ export class PhotoService {
     );
   }
 
-  deletePhoto(id:number): Observable<any>{
+  deletePhoto(id:string): Observable<any>{
     const url = `${this.photoUrl}/${id}`;
     return this.http.delete<Photo>(url).pipe(
       tap((deletedId: any)=> console.info(`Deleting photo with id=${deletedId} completed`)),

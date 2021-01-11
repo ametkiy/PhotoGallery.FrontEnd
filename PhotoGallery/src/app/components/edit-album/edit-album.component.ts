@@ -24,10 +24,11 @@ export class EditAlbumComponent implements OnInit {
     this.dialogBox.close();
   }
 
-  onSubmit(title:string, description:string){
+  onSubmit(title:string, description:string, tags:string){
     this.album!.title = title;
     if (this.album!.title=="" || this.album!.title==null) return;
     this.album!.description = description;
+    this.album!.tags = tags;
 
     if(this.album!.id == null || this.album!.id == ""){
       this.albumService.addAlbum(this.album!).subscribe((result : any) => {
