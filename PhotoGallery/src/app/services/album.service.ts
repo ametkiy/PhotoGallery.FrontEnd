@@ -27,9 +27,18 @@ export class AlbumService {
   }
 
   getAlbums(): Observable<Album | never[]>{
-    let result = this.http.get<Album>(this.albumUrl).pipe(
+    let result = this.http.get<Album>(this.albumUrl+'s').pipe(
       tap(()=>console.info('Fetched albums')),
       catchError(this.handleError('getAlbums',[]))
+    );
+    return result;
+  }
+
+  getPhotosByAlbumId(page:number, pageSize:number, albumId:any): Observable<any| never[]>{
+    const url = `${this.albumUrl}/${albumId}/photos?page=${page}&pageSize=${pageSize}`;
+    let result = this.http.get<any| never[]>(url).pipe(
+      tap(()=>console.info('Fetched photos')),
+      catchError(this.handleError('getPhotos',[]))
     );
     return result;
   }
@@ -50,7 +59,6 @@ export class AlbumService {
     );
     return tmp;
   }
-
   
   deleteAlbum(id:number): Observable<any>{
     const url = `${this.albumUrl}/${id}`;
