@@ -33,12 +33,8 @@ export class AlbumsComponent implements OnInit {
   deleteAlbumById(id:any){
     if(confirm("Are you sure to delete current album")) {
       this.albumService.deleteAlbum(id).subscribe((response) => {
-        if(response == id ){
-          this.selectedAlbumId = '00000000-0000-0000-0000-000000000000';
-          this.getAlbums();
-        }else{
-          alert("Cann't delete album");
-        }
+        this.selectedAlbumId = '00000000-0000-0000-0000-000000000000';
+        this.getAlbums();
       });
     }
   }

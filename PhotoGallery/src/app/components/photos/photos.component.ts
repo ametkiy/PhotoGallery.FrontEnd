@@ -102,17 +102,14 @@ export class PhotosComponent implements OnInit {
   deletePhotoById(photo:Photo){
     if(confirm("Are you sure to delete this file: "+photo.fileName)) {
       this.photoService.deletePhoto(photo.id).subscribe((response) => {
-        if (response == photo.id){
-          this.selectedImageSource=""; 
-          this.photoCount--;
-          this.totalPages = Math.ceil(this.photoCount / this.pageSize);
-          if (this.page>this.totalPages){
-            this.page--;
-          }
-          this.refreshPhotoPage();
-        }else
-          alert("Cann't delete photo")
-
+        this.selectedImageSource=""; 
+        this.photoCount--;
+        this.totalPages = Math.ceil(this.photoCount / this.pageSize);
+        if (this.page>this.totalPages){
+          this.page--;
+        }
+        
+        this.refreshPhotoPage();
       });
     }
   }

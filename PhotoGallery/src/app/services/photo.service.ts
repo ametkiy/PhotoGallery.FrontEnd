@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PhotoService {
-  private photoUrl :string = environment.apiUrl + "photo"; 
+  private photoUrl :string = environment.apiUrl + "photos"; 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE' 
@@ -26,7 +26,7 @@ export class PhotoService {
   }
 
   getPhotos(page:number, pageSize:number): Observable<any>{
-    const url = `${this.photoUrl}s?page=${page}&pageSize=${pageSize}`;
+    const url = `${this.photoUrl}?page=${page}&pageSize=${pageSize}`;
     let result = this.http.get<any>(url).pipe(
       tap(()=>console.info('Fetched photos')),
       catchError(this.handleError('getPhotos',[]))

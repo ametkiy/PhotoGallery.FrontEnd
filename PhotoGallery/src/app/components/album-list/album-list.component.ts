@@ -65,13 +65,9 @@ export class AlbumListComponent implements OnInit {
   deleteAlbum(){
     if(confirm("Are you sure to delete current album")) {
       this.albumService.deleteAlbum(this.selectedAlbum).subscribe((response) => {
-        if(response == this.selectedAlbum ){
-          this.selectedAlbum=null; 
-          this.newSelectedAlbumEvent.emit(this.selectedAlbum);
-          this.getAlbums();
-        }else{
-          alert("Cann't delete album");
-        }
+        this.selectedAlbum=null; 
+        this.newSelectedAlbumEvent.emit(this.selectedAlbum);
+        this.getAlbums();
       });
     }
   }
