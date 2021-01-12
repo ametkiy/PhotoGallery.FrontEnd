@@ -1,3 +1,18 @@
-.btn{
+.btn.btn-light .btn.btn-success{
     margin: 10px;
+}
+
+.ulgrid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 2px;
+}
+
+.liCard {
+    list-style-type: none; 
+}
+
+.d-flex.justify-content-center.tags{
+    max-height: 75 px;
+    overflow: auto;
 }

@@ -16,12 +16,24 @@
             <app-album-list [selectedAlbum]="photo.albumId" (newSelectedAlbumEvent)="albumChengedEvent($event)"></app-album-list>
         </div>
         <div>
-            <span>
-                Tags:
-            </span><br>
-            <input type="text" class="textTags" placeholder="Tags" [(ngModel)] = "photo.tags"><br>
-            <small id="tagsHelp" class="form-text text-muted">The semicolon (;) serves as a separator between tags.</small>
-        </div>
+            <label for="albumTags">Tags</label>
+            <div class="d-flex justify-content-center tags">
+                <ul class="ulgrid">
+                    <li class="liCard" *ngFor="let tag of photo.tags; let i=index">   
+                        <label>
+                            {{tag.name}}
+                            <button class="btn btn-danger btn-sm" (click)="deleteTagFromAlbum(i)">X</button>
+                        </label>
+                    </li> 
+                </ul>
+            </div>
+        
+            <div class="input-group mb-3">
+                <input #albumTags type="text" class="form-control" id="albumTags" placeholder="Tags" >
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-outline-secondary" (click)="onTagSubmit(albumTags)">Add tag</button>
+                </div>
+            </div>
         <div>
             <div>
                 <label style="width: 100%;">

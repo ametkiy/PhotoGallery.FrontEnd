@@ -7,11 +7,32 @@
     <label for="albumDescription">Description</label>
     <textarea #albumDescription class="form-control" id="albumDescription" rows="3" >{{album.description}}</textarea>
 </div>
-<div class="form-group">
+<div >
     <label for="albumTags">Tags</label>
-    <input #albumTags type="text" class="form-control" id="albumTags" placeholder="Tags" required value="{{album.tags}}">
-    <small id="tagsHelp" class="form-text text-muted">The semicolon (;) serves as a separator between tags.</small>
+    <div class="d-flex justify-content-center tags">
+        <ul class="ulgrid">
+            <li class="liCard" *ngFor="let tag of album.tags; let i=index">   
+                <label>
+                    {{tag.name}}
+                    <button class="btn btn-danger btn-sm" (click)="deleteTagFromAlbum(i)">X</button>
+                </label>
+            </li> 
+        </ul>
+    </div>
+
+
+    <div class="input-group mb-3">
+        <input #albumTags type="text" class="form-control" id="albumTags" placeholder="Tags" >
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-outline-secondary" (click)="onTagSubmit(albumTags)">Add tag</button>
+        </div>
+    </div>
+    
 </div>
+
+
+
+
 <div class="d-flex justify-content-end">
     <button type="submit" class="btn btn-success" (click)="onSubmit(albumTitle.value, albumDescription.value, albumTags.value)">Submit</button>
     <button class="btn btn-light" (click)="onClickClose()">Cancel</button>

@@ -1,5 +1,6 @@
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { SafeResourceUrl } from '@angular/platform-browser';
+import { Tag } from './tag';
 
 export class Photo{
     id: string="";
@@ -9,5 +10,5 @@ export class Photo{
     photoData!:any;
     addDate!:Date;
     image:SafeResourceUrl | undefined;
-    tags:string="";
+    tags:Tag[]=[];
 }
