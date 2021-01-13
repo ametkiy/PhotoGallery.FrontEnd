@@ -7,7 +7,8 @@ export class Photo{
     fileName: string ="";
     description:string = "";
     albumId:string="";
-    photoData!:any;
+    photoData:any;
+    imageToShow:any;
     addDate!:Date;
     image:SafeResourceUrl | undefined;
     tags:Tag[]=[];

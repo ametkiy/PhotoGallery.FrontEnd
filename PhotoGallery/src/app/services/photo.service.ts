@@ -43,6 +43,15 @@ export class PhotoService {
      return result;
   }
 
+  getPhotoFile(id: any): Observable<any> {
+    const url = `${this.photoUrl}/${id}/file`;
+    let result = this.http.get(url, { responseType: 'blob' }).pipe(
+      tap(()=>console.info(`Fetched photo file by id=${id}`)),
+      catchError(this.handleError<any>(`getPhotoFile id=${id}`))
+    );
+     return result;
+  }
+
   addPhoto(photo: FormData): Observable<any> {
     let tmp = this.http.post<any>(this.photoUrl, photo).pipe(
       tap((newPhotosGuids: any) => console.info(`Photo adding completed`)),

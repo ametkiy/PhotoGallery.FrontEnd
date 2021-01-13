@@ -45,10 +45,6 @@ export class PhotosComponent implements OnInit {
     this.refreshPhotoPage();
   }
 
-  photo_url(data: Photo):SafeResourceUrl{
-    return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${data.photoData}`);;
-  }
-
   getPhotos():void{
     this.loadedData = true;
     this.photoService.getPhotos(this.page, this.pageSize).subscribe((pageOfFoto: any) =>{
@@ -68,17 +64,26 @@ export class PhotosComponent implements OnInit {
 
   getBinaryDataForPhotos(){
     for(let i=0; i<this.photos.length;i++){
-      this.photoService.getPhoto(this.photos[i].id)
-        .subscribe(photo =>{
+      this.photoService.getPhotoFile(this.photos[i].id)
+        .subscribe((photo:any) =>{
           if (photo!=null){
-            this.photos[i].tags = photo.tags;
-            this.photos[i].photoData = photo.photoData;
-            if (i==0){
-              this.selectedImageSource = this.photo_url(this.photos[i]);
-            }
+            this.photos[i].photoData = photo;
+            this.photo_url(this.photos[i]);
           }
         });
     }
+  }
+
+  photo_url(data: Photo):any{
+    let reader = new FileReader();
+    reader.addEventListener("load", () => {
+      data.imageToShow = reader.result;
+    }, false);
+ 
+    if (data.photoData) {
+       reader.readAsDataURL(data.photoData);
+    }
+    //return this.sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${data.photoData}`);;
   }
 
   getPhotosByAlbumId(){

@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center image-container">
-                        <img [src]=photo_url(photo) class="card-img-top" *ngIf="photo.photoData" (click)="showImagePreview(photo_url(photo))">
+                        <img [src]=photo.imageToShow class="card-img-top" *ngIf="photo.photoData" (click)="showImagePreview(photo.imageToShow)">
                     </div>
                     <div class="card-body">
                         <h5 class="card-title" data-toggle="tooltip" title="{{photo.fileName}}">{{photo.fileName}}</h5>

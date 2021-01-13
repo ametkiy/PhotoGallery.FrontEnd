@@ -10,7 +10,7 @@ import { SafeResourceUrl } from '@angular/platform-browser';
 export class ImagePreviewComponent implements OnInit {
 
   constructor(private dialogBox:MatDialogRef<ImagePreviewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {url: SafeResourceUrl}) { }
+    @Inject(MAT_DIALOG_DATA) public data: {url: any}) { }
 
   ngOnInit(): void {
   }
