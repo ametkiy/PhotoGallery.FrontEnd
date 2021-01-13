@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Galary": {
+    "PhotoGallery": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/Galary",
+            "outputPath": "dist/PhotoGallery",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -70,18 +70,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Galary:build"
+            "browserTarget": "PhotoGallery:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "Galary:build:production"
+              "browserTarget": "PhotoGallery:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "Galary:build"
+            "browserTarget": "PhotoGallery:build"
           }
         },
         "test": {
@@ -118,16 +118,16 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "Galary:serve"
+            "devServerTarget": "PhotoGallery:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "Galary:serve:production"
+              "devServerTarget": "PhotoGallery:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "Galary"
+  "defaultProject": "PhotoGallery"
 }
