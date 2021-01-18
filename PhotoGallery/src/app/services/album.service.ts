@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AlbumService {
 
-  private albumUrl :string = environment.apiUrl + "albums";
+  private albumUrl :string = environment.apiUrl + "api/albums";
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE' 

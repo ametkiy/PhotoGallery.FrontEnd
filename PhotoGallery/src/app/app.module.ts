@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule} from '@angular/forms'
 import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +16,8 @@ import { AlbumListComponent } from './components/album-list/album-list.component
 import { AlbumsComponent } from './components/albums/albums.component';
 import { EditAlbumComponent } from './components/edit-album/edit-album.component';
 import { ImagePreviewComponent } from './components/image-preview/image-preview.component'
-
+import { TokenInterceptor } from './tokenInterceptor ';
+import { LoginComponent } from './components/login/login.component'
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ImagePreviewComponent } from './components/image-preview/image-preview.
     AlbumListComponent,
     AlbumsComponent,
     EditAlbumComponent,
-    ImagePreviewComponent
+    ImagePreviewComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,12 @@ import { ImagePreviewComponent } from './components/image-preview/image-preview.
     BrowserAnimationsModule
   ],
   providers: [
-    PhotoService
+    PhotoService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents:[PhotoDetailComponent, EditAlbumComponent, ImagePreviewComponent]
