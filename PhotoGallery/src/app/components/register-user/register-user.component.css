@@ -1,0 +1,22 @@
+.container{
+
+}
+.centered-form{
+    width: 100%;
+
+}
+
+.centered-form .panel{
+	background: rgba(255, 255, 255, 0.8);
+
+    width: 500px;
+    height: auto;
+}
+
+.form-group{
+    margin: 10px;
+}
+
+.btn-block{
+    margin: 10px;
+}

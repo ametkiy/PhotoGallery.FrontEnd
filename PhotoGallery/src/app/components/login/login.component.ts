@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Location } from '@angular/common';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { RegisterUserComponent } from '../register-user/register-user.component'
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,9 @@ import { Location } from '@angular/common';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService:AuthService,private _location: Location) { }
+  constructor(private authService:AuthService, 
+    private _location: Location,
+    private dialog:MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -23,4 +27,20 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+
+  onClickRegister(){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    dialogConfig.maxWidth = "70%";
+   
+
+    let dialogRef = this.dialog.open(RegisterUserComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result!=null){
+        
+      }
+    });
+  }
+
 }

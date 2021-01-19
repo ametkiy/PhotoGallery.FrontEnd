@@ -13,14 +13,17 @@
                         </div>
                         <div class="form-group">
                             <label for="password" class="text-info">Password:</label><br>
-                            <input #password type="text" name="password" id="password" class="form-control">
+                            <input #password type="password" name="password" id="password" class="form-control">
                         </div>
                         <div class="form-group">
                             <br>
-                            <input type="button" name="submit" class="btn btn-info btn-md" value="Submit" (click)="onSubmit(username.value, password.value)">
+                            <div class="d-flex justify-content-center">
+                                
+                                <input type="button" name="submit" class="btn btn-info btn-md" value="Submit" (click)="onSubmit(username.value, password.value)">
+                            </div>
                         </div>
                         <div id="register-link" class="text-right">
-                            <a href="#" class="text-info">Register here</a>
+                            <a class="text-info" (click)="onClickRegister()">Register here</a>
                         </div>
                         
                     </form>

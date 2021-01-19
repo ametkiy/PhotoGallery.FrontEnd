@@ -9,6 +9,6 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Photo Gallery';
-  constructor(private http: HttpClient, private router: Router){
+  constructor(private http: HttpClient, public router: Router){
   }
 }
