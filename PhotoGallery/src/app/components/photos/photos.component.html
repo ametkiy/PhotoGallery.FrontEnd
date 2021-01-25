@@ -34,8 +34,9 @@
                         <img [src]=photo.imageToShow class="card-img-top" *ngIf="photo.photoData" (click)="showImagePreview(photo.imageToShow)">
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title" data-toggle="tooltip" title="{{photo.fileName}}">{{photo.fileName}}</h5>
-                        <p class="card-text" data-toggle="tooltip" title="{{photo.description}}">{{photo.description}}</p>
+                        <h5 class="card-title" data-toggle="tooltip" title="File Name: {{photo.fileName}}">{{photo.fileName}}</h5>
+                        <p class="card-text" data-toggle="tooltip" title="Owner: {{photo.firstName}} {{photo.lastName}}">{{photo.firstName}} {{photo.lastName}}</p>
+                        <p class="card-text" data-toggle="tooltip" title="Description: {{photo.description}}">{{photo.description}}</p>
                         <div class="d-flex justify-content-center">
                             <a class="btn btn-primary" (click)="showDitailForm(i)">Edit</a>
                             <button class="btn btn-danger" (click)="deletePhotoById(photo)">X</button>

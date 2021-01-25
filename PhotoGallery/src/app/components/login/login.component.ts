@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
     if (username && password){
       this.authService.login(username,password).subscribe((result: any) =>{
         if (result!=null){
+          console.info(result);
           localStorage.setItem('token', result.access_token);
           this._location.back();
         }

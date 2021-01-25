@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  private url :string = environment.apiUrl + "connect/token";
+  private url :string = environment.apiUrl ;
 
   constructor(private http:HttpClient) { }
 
@@ -38,13 +38,22 @@ export class AuthService {
     body.set('password', password);
     body.set('grant_type', "password");
 
-    let tmp = this.http.post<any>(this.url, body.toString(), {
+    let tmp = this.http.post<any>(this.url+ "connect/token", body.toString(), {
       headers: headers
     }).pipe(
       tap(() => console.info(`Login completed`)),
       catchError(this.handleError<any>('login'))
     );
     return tmp;
+  }
+
+  logout():Observable<any>{
+    let result = this.http.get<any>(this.url+ "connect/logout")
+      .pipe(
+        tap(() => console.log('LogOut compleated')),
+        catchError(this.handleError<any>('logout'))
+      );
+      return result;
   }
 
 }

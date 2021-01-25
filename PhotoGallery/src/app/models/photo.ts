@@ -12,4 +12,7 @@ export class Photo{
     addDate!:Date;
     image:SafeResourceUrl | undefined;
     tags:Tag[]=[];
+    private:boolean=false;
+    firstName:string="";
+    lastName:string="";
 }

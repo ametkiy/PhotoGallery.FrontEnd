@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { AccountsService } from './services/accounts.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +10,7 @@ import { AccountsService } from './services/accounts.service';
 })
 export class AppComponent {
   title = 'Photo Gallery';
-  constructor(private http: HttpClient, public router: Router, private accountsService:AccountsService){
+  constructor(private http: HttpClient, public router: Router, private authService:AuthService){
   }
 
   onClickLogOut(){
