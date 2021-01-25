@@ -24,7 +24,7 @@ export class AccountsService {
 
   registrUser(user: RegisterUser): Observable<any> {
     let tmp = this.http.post<any>(this.url+'/register', user).pipe(
-      tap(() => console.info(`Adding user completed`)),
+      tap((id:string) => console.info(`Adding user completed. ID = ${id}`)),
       catchError(this.handleError<any>('registrUser'))
     );
     return tmp;

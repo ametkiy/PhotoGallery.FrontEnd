@@ -28,13 +28,11 @@ export class AddPhotoComponent implements OnInit {
     this.addedFilesCount = 0;
     this.errors = [];
     var data = new FormData();
-    if(event.target.files.length > 1) {
-        for(var x = 0; x < event.target.files.length; x++) {
-            data.append('Files', event.target.files.item(x));    
-        }
-    } else {
-        data.append('Files', event.target.files[0]);   
+   
+    for(var x = 0; x < event.target.files.length; x++) {
+        data.append('Files', event.target.files.item(x));    
     }
+ 
 
     data.append("AlbumId", this.selectedAlbumID);
 

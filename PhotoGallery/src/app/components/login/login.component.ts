@@ -21,9 +21,10 @@ export class LoginComponent implements OnInit {
   onSubmit(username:string, password:string){
     if (username && password){
       this.authService.login(username,password).subscribe((result: any) =>{
-        //console.log(result);
-        localStorage.setItem('token', result.access_token);
-        this._location.back();
+        if (result!=null){
+          localStorage.setItem('token', result.access_token);
+          this._location.back();
+        }
       });
     }
   }

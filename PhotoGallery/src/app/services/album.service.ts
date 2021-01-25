@@ -45,7 +45,7 @@ export class AlbumService {
 
   addAlbum(album: Album): Observable<any> {
     let tmp = this.http.post<any>(this.albumUrl, album).pipe(
-      tap((newAlbumId: number) => console.info(`Adding album completed`)),
+      tap((newAlbumId: string) => console.info(`Adding album completed`)),
       catchError(this.handleError<any>('addAlbum'))
     );
     return tmp;
@@ -54,7 +54,7 @@ export class AlbumService {
   editAlbum(album: Album): Observable<any> {
     const url = `${this.albumUrl}/${album.id}`;
     let tmp = this.http.put<any>(url, album).pipe(
-      tap((albumId: number) => console.info(`Editing album by id=${album.id} completed`)),
+      tap((albumId: string) => console.info(`Editing album by id=${album.id} completed`)),
       catchError(this.handleError<any>('editAlbum'))
     );
     return tmp;

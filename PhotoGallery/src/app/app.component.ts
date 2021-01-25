@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AccountsService } from './services/accounts.service';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,11 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Photo Gallery';
-  constructor(private http: HttpClient, public router: Router){
+  constructor(private http: HttpClient, public router: Router, private accountsService:AccountsService){
+  }
+
+  onClickLogOut(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }
