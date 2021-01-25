@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class PhotoService {
-  private photoUrl :string = environment.apiUrl + "photos"; 
+  private photoUrl :string = environment.apiUrl + "api/photos"; 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE' 

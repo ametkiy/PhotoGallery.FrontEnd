@@ -159,11 +159,11 @@ export class PhotosComponent implements OnInit {
     }
   }
   
-  showImagePreview(url:SafeResourceUrl){
+  showImagePreview(imageToShow:any){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
-    dialogConfig.data = {url:url};
+    dialogConfig.data = {url:imageToShow};
 
     let dialogRef = this.dialog.open(ImagePreviewComponent, dialogConfig);
   }

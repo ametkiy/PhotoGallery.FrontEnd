@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class TagService {
 
-  private tagUrl :string = environment.apiUrl + "tags";
+  private tagUrl :string = environment.apiUrl + "api/tags";
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE' 
