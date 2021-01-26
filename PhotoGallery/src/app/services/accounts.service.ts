@@ -17,6 +17,8 @@ export class AccountsService {
 
   handleError<T>(operation ="operation", result?: T){
     return (error:any): Observable<T> =>{
+      if (operation=="registrUser" )
+        alert(error.error.error);
       console.log(error);
       return of(result as T); 
     }
@@ -30,5 +32,12 @@ export class AccountsService {
     return tmp;
   }
 
+  getUserInfo(): Observable<any> {
+    let tmp = this.http.get<any>(this.url+'/userInfo').pipe(
+      tap(() => console.info(`User info is received`)),
+      catchError(this.handleError<any>('getUserInfo'))
+    );
+    return tmp;
+  }
 
 }

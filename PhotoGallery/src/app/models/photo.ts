@@ -13,6 +13,7 @@ export class Photo{
     image:SafeResourceUrl | undefined;
     tags:Tag[]=[];
     private:boolean=false;
+    userId:string="";
     firstName:string="";
     lastName:string="";
 }

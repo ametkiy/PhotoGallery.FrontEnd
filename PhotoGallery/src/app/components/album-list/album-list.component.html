@@ -1,12 +1,12 @@
 Album:
 <div class="selectControll">
-    <select ng-model="selectedAlbum" [(ngModel)]="selectedAlbum" (change)="onChangeAlbum($event)" class="browser-default custom-select">
+    <select ng-model="selectedAlbum" [(ngModel)]="selectedAlbum" (change)="onChangeAlbum($event)" class="browser-default custom-select" [disabled]="!userIsOwner">
         <option [ngValue]="null"></option>
         <option *ngFor="let album of albums" value="{{album.id}}">
             {{album.title}}
         </option> 
     </select>
-    <button class="btn btn-outline-success btn-sm" (click)="startAddAlbum()">Add Album</button>
-    <button *ngIf = "selectedAlbum" class="btn btn-outline-info btn-sm" (click)="editAlbum()">Edit Album</button>
-    <button *ngIf = "selectedAlbum" class="btn btn-outline-danger btn-sm" (click)="deleteAlbum()">Delete Album</button>
+    <button class="btn btn-outline-success btn-sm" (click)="startAddAlbum()" [disabled]="!userIsOwner">Add Album</button>
+    <button *ngIf = "selectedAlbum" class="btn btn-outline-info btn-sm" (click)="editAlbum()" [disabled]="!userIsOwner">Edit Album</button>
+    <button *ngIf = "selectedAlbum" class="btn btn-outline-danger btn-sm" (click)="deleteAlbum()" [disabled]="!userIsOwner">Delete Album</button>
 </div>

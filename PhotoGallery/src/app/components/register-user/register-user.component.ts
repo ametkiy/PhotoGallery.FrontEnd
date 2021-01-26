@@ -56,7 +56,5 @@ export class RegisterUserComponent implements OnInit {
         this.dialogBox.close(user);
       }
     });
-
-    console.warn(this.registerForm.value);
   }
 }

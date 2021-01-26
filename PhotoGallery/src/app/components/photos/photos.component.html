@@ -38,8 +38,8 @@
                         <p class="card-text" data-toggle="tooltip" title="Owner: {{photo.firstName}} {{photo.lastName}}">{{photo.firstName}} {{photo.lastName}}</p>
                         <p class="card-text" data-toggle="tooltip" title="Description: {{photo.description}}">{{photo.description}}</p>
                         <div class="d-flex justify-content-center">
-                            <a class="btn btn-primary" (click)="showDitailForm(i)">Edit</a>
-                            <button class="btn btn-danger" (click)="deletePhotoById(photo)">X</button>
+                            <a class="btn btn-primary" (click)="showDitailForm(i)">Details</a>
+                            <button class="btn btn-danger" (click)="deletePhotoById(photo)" [disabled]="!userIsOwner(photo.userId)">X</button>
                         </div>
                     </div>
                 </div>

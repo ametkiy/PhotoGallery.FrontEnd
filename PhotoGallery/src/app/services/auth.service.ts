@@ -20,6 +20,7 @@ export class AuthService {
 
   public clearToken(){
     localStorage.removeItem('token');
+    localStorage.removeItem('userInfo');
   }
 
   handleError<T>(operation ="operation", result?: T){

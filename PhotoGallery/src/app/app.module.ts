@@ -16,9 +16,10 @@ import { AlbumListComponent } from './components/album-list/album-list.component
 import { AlbumsComponent } from './components/albums/albums.component';
 import { EditAlbumComponent } from './components/edit-album/edit-album.component';
 import { ImagePreviewComponent } from './components/image-preview/image-preview.component'
-import { TokenInterceptor } from './tokenInterceptor ';
+import { TokenInterceptor } from './tokenInterceptor';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component'
+
 
 @NgModule({
   declarations: [

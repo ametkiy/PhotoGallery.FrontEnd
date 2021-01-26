@@ -13,6 +13,7 @@ import { EditAlbumComponent } from '../edit-album/edit-album.component'
 export class AlbumListComponent implements OnInit {
   albums:Album[] = [];
   @Input() selectedAlbum!:any;
+  @Input() userIsOwner:boolean=false;
   @Output() newSelectedAlbumEvent = new EventEmitter<any>();
 
   constructor(private albumService:AlbumService,

@@ -4,7 +4,7 @@
     <div class="form-group">
         <h3>{{photo.fileName | uppercase}}</h3>
         <div>
-            <span>id: </span>{{photo.id}}
+            <span>Ovner: </span>{{photo.firstName}} {{photo.lastName}}
         </div>
         <div>
             <span>File name: </span>{{photo.fileName}}
@@ -13,7 +13,7 @@
             <span>Add date: </span>{{photo.addDate | date:'dd-MM-yyyy HH:mm:ss'}}
         </div>
         <div>
-            <app-album-list [selectedAlbum]="photo.albumId" (newSelectedAlbumEvent)="albumChengedEvent($event)"></app-album-list>
+            <app-album-list [selectedAlbum]="photo.albumId" [userIsOwner]="userIsOwner(photo.userId)" (newSelectedAlbumEvent)="albumChengedEvent($event)" ></app-album-list>
         </div>
         <div>
             <label for="albumTags">Tags</label>
@@ -22,28 +22,29 @@
                     <li class="liCard" *ngFor="let tag of photo.tags; let i=index">   
                         <label>
                             {{tag.name}}
-                            <button class="btn btn-danger btn-sm" (click)="deleteTagFromAlbum(i)">X</button>
+                            <button class="btn btn-danger btn-sm" (click)="deleteTagFromAlbum(i)" [disabled]="!userIsOwner(photo.userId)">X</button>
                         </label>
+                         
                     </li> 
                 </ul>
             </div>
         
             <div class="input-group mb-3">
-                <input #albumTags type="text" class="form-control" id="albumTags" placeholder="Tags" >
+                <input #albumTags type="text" class="form-control" id="albumTags" placeholder="Tags" [disabled]="!userIsOwner(photo.userId)">
                 <div class="input-group-append">
-                    <button type="submit" class="btn btn-outline-secondary" (click)="onTagSubmit(albumTags)">Add tag</button>
+                    <button type="submit" class="btn btn-outline-secondary" (click)="onTagSubmit(albumTags)" [disabled]="!userIsOwner(photo.userId)">Add tag</button>
                 </div>
             </div>
         <div>
             <div>
                 <label style="width: 100%;">
                     Description:
-                    <textarea class="description" [(ngModel)] = "photo.description" placeholder="Description" rows="4"></textarea>
+                    <textarea class="description" [(ngModel)] = "photo.description" placeholder="Description" rows="4" [disabled]="!userIsOwner(photo.userId)"></textarea>
                 </label>               
             </div>
             <div class="container">
                 <div class="center">
-                <button (click)="saveChangedInPhoto()" class="btn btn-success">Update</button>
+                <button (click)="saveChangedInPhoto()" class="btn btn-success" [disabled]="!userIsOwner(photo.userId)">Update</button>
                 <button class="btn btn-primary " (click)="goBack()">Close</button>
                 </div>
             </div>

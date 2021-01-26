@@ -82,4 +82,13 @@ export class PhotoDetailComponent implements OnInit {
     this.photo.tags.splice(index,1);
   }
 
+  userIsOwner(id:string):boolean{
+    let userInfo = JSON.parse(localStorage.getItem("userInfo")!);
+    if (userInfo!=null){
+      let result = userInfo.id===id;
+      return result;
+    }else
+      return false;
+  }
+
 }
