@@ -13,6 +13,9 @@
             <span>Add date: </span>{{photo.addDate | date:'dd-MM-yyyy HH:mm:ss'}}
         </div>
         <div>
+            <span>Private: </span><input #chbPrivate type="checkbox" class="form-check-input" [checked]="photo.private" [disabled]="!userIsOwner(photo.userId)" (change)="onChange(inputEl.checked)">
+        </div>
+        <div>
             <app-album-list [selectedAlbum]="photo.albumId" [userIsOwner]="userIsOwner(photo.userId)" (newSelectedAlbumEvent)="albumChengedEvent($event)" ></app-album-list>
         </div>
         <div>

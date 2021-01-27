@@ -9,7 +9,7 @@ import {
 } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/internal/operators/tap';
+import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

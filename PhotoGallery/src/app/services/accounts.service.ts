@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
-import { catchError } from 'rxjs/internal/operators/catchError';
-import { tap } from 'rxjs/internal/operators/tap';
+import { catchError } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { RegisterUser } from '../models/registerUser';
 

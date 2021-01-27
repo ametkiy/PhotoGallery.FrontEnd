@@ -8,6 +8,7 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Tag } from 'src/app/models/tag';
 import { TagService } from 'src/app/services/tag.service';
+import { CheckUser } from '../../utils/check.user'
 
 @Component({
   selector: 'app-photo-detail',
@@ -83,12 +84,11 @@ export class PhotoDetailComponent implements OnInit {
   }
 
   userIsOwner(id:string):boolean{
-    let userInfo = JSON.parse(localStorage.getItem("userInfo")!);
-    if (userInfo!=null){
-      let result = userInfo.id===id;
-      return result;
-    }else
-      return false;
+    return CheckUser.userIsOwner(id);
+  }
+
+  onChange(value:boolean){
+    this.photo.private = value;
   }
 
 }

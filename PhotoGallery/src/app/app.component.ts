@@ -23,7 +23,9 @@ export class AppComponent {
   }
 
   getUserName():string{
-    let userInfo = JSON.parse(localStorage.getItem("userInfo")!);
+    let userInfoJson = localStorage.getItem("userInfo");
+    if (userInfoJson == null) return "";
+    let userInfo = JSON.parse(userInfoJson);
     if (userInfo!=null)
       return userInfo.firstName + " " + userInfo.lastName;
     else
