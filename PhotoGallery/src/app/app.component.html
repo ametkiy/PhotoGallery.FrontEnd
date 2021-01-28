@@ -3,7 +3,7 @@
     <h1 class="title">{{title}}</h1>
   </div>
 
-  <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center">
+  <nav class="navbar navbar-light navbar-expand-md bg-faded justify-content-center" style="background-color: #e3f2fd;">
     <a href="#" class="navbar-brand d-flex w-50 mr-auto"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
         <span class="navbar-toggler-icon"></span>
@@ -18,19 +18,17 @@
             </li>
         </ul>
 
+        <div class="nav navbar-nav ml-auto w-100 justify-content-end"> 
+          <button mat-button [matMenuTriggerFor]="menu" class="mat-button">{{userInfo}}</button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="onClickLogOut()">Log Out</button>
+          </mat-menu>
+        </div>
+      </div>
+  </nav>
 
+  
 
-
-        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
-            <li class="nav-item vertical-center">
-              <h6>{{userInfo}}</h6>
-            </li>
-            <li class="nav-item">
-              <button class="btn btn-outline-success my-2 my-sm-0 logout" type="submit" (click)="onClickLogOut()">Log Out</button>
-            </li>
-        </ul>
-    </div>
-</nav>
 
 </div>
 <router-outlet></router-outlet> 

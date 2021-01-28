@@ -20,6 +20,8 @@ import { TokenInterceptor } from './tokenInterceptor';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component'
 
+import {MatMenuModule} from '@angular/material/menu'
+
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { RegisterUserComponent } from './components/register-user/register-user.
     FormsModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule, ReactiveFormsModule,
+    MatMenuModule
   ],
   providers: [
     PhotoService,
