@@ -37,7 +37,11 @@
                         <h5 class="card-title" data-toggle="tooltip" title="File Name: {{photo.fileName}}">{{photo.fileName}}</h5>
                         <p class="card-text" data-toggle="tooltip" title="Owner: {{photo.firstName}} {{photo.lastName}}">{{photo.firstName}} {{photo.lastName}}</p>
                         <p class="card-text" data-toggle="tooltip" title="Description: {{photo.description}}">{{photo.description}}</p>
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center buttons">
+                            <div (mouseover)="onMouseOverLike(photo)"  >
+                                <mat-icon class="icon" matBadge="{{photo.likesCount}}" matBadgeSize="small" [matBadgeHidden]="photo.likesCount<1" matBadgeOverlap="false" matBadgeColor="warn" aria-hidden="false" aria-label="Like icon" *ngIf="photo.userIsliked" (click)="setLike(photo)" data-toggle="tooltip" data-placement="bottom" title="{{getToolTip(photo)}}">favorite</mat-icon>
+                                <mat-icon class="icon" matBadge="{{photo.likesCount}}" matBadgeSize="small" [matBadgeHidden]="photo.likesCount<1" matBadgeOverlap="false" matBadgeColor="warn" aria-hidden="false" aria-label="No like icon" *ngIf="!photo.userIsliked" (click)="setLike(photo)" data-toggle="tooltip" data-placement="bottom" title="{{getToolTip(photo)}}">favorite_border</mat-icon>
+                            </div>
                             <a class="btn btn-primary" (click)="showDitailForm(i)">Details</a>
                             <button class="btn btn-danger" (click)="deletePhotoById(photo)" [disabled]="!userIsOwner(photo.userId)">X</button>
                         </div>

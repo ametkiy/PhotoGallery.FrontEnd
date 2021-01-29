@@ -33,4 +33,12 @@ export class TagService {
     );
     return result;
   }
+
+  getTags(): Observable<any> {
+    let result = this.http.get<any>(this.tagUrl).pipe(
+      tap((tags: any) => console.info(`Geting tags completed`)),
+      catchError(this.handleError<any>('getTags'))
+    );
+    return result;
+  }
 }

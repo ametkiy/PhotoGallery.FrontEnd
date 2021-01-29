@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ImagePreviewComponent } from '../image-preview/image-preview.component';
 import { PhotoDetailComponent } from '../photo-detail/photo-detail.component';
 import { AlbumService } from 'src/app/services/album.service';
+import { LikesService } from 'src/app/services/likes.service';
 
 @Component({
   selector: 'app-photos',
@@ -25,7 +26,10 @@ export class PhotosComponent implements OnInit {
   pageSize: number = 10;
   totalPages:number = 1;
 
+  showToastLikedUsers:boolean=false;
+
   constructor(private photoService:PhotoService, private albumService:AlbumService,
+    private likeService:LikesService,
     private sanitizer: DomSanitizer, 
     private dialog:MatDialog) { }
 
@@ -64,6 +68,7 @@ export class PhotosComponent implements OnInit {
 
   getBinaryDataForPhotos(){
     for(let i=0; i<this.photos.length;i++){
+      //get photo
       this.photoService.getPhotoFile(this.photos[i].id)
         .subscribe((photo:any) =>{
           if (photo!=null){
@@ -71,6 +76,11 @@ export class PhotosComponent implements OnInit {
             this.photo_url(this.photos[i]);
           }
         });
+      // get info about like
+      this.likeService.isUserLikedPhoto(this.photos[i].id)
+        .subscribe((result:boolean) => {
+          this.photos[i].userIsliked = result;
+        })  
     }
   }
 
@@ -212,4 +222,41 @@ export class PhotosComponent implements OnInit {
     }else
       return false;
   }
+
+  setLike(photo:Photo){
+    this.likeService.setLike(photo.id).subscribe((result:boolean)=>{
+      if (result!=null){
+        photo.userIsliked = result;
+        this.likeService.getPhotoLikesCount(photo.id).subscribe((result:number) =>{
+          if (result!=null){
+            photo.likesCount = result;
+          }
+        })
+      }
+    })
+  }
+
+  onMouseOverLike(photo:Photo){
+    if (photo.likesCount<1)return;
+    this.likeService.getUsersListLikedPhoto(photo.id).subscribe((result:any) => {
+      if (result!=null){
+        photo.userLikedList = result;
+        this.showToastLikedUsers = true;
+      }
+    })
+  }
+
+  getToolTip(photo:Photo):string{
+    if (photo.userLikedList==null ||  photo.userLikedList.length<1 )return "";
+    let result = "";
+    for (let i = 0; i < photo.userLikedList.length; i++) {
+      if (result==="")
+        result = String(photo.userLikedList[i].fullName);
+      else
+        result = result + "\n" + String(photo.userLikedList[i].fullName);
+      
+    }
+    return result;
+  }
+
 }

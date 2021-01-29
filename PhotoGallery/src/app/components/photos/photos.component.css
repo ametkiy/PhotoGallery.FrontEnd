@@ -12,7 +12,8 @@
     height:  200px ;
     width: 250px;
     object-fit:scale-down;
-    max-width:100%
+    max-width:100%;
+    cursor: pointer;
 }
 
 .navigation button{
@@ -21,7 +22,7 @@
 }
 
 .btn.btn-danger{
-    margin-left: 10px;
+    margin-left: 15px;
 }
 
 .card-text{
@@ -46,5 +47,18 @@
 
 .liCard {
     list-style-type: none; 
+}
+
+.buttons{
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+}
+
+.icon{
+    font-size: xx-large;
+    color: red;
+    margin-right: 20px;
+    cursor: pointer;
 }
 

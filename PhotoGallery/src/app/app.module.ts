@@ -21,6 +21,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component'
 
 import {MatMenuModule} from '@angular/material/menu'
+import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
 
 
 @NgModule({
@@ -44,7 +46,7 @@ import {MatMenuModule} from '@angular/material/menu'
     MatDialogModule,
     BrowserAnimationsModule,
     FormsModule, ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,MatIconModule, MatBadgeModule
   ],
   providers: [
     PhotoService,

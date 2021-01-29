@@ -1,6 +1,7 @@
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { Tag } from './tag';
+import { UserLiked } from './userLiked';
 
 export class Photo{
     id: string="";
@@ -16,4 +17,7 @@ export class Photo{
     userId:string="";
     firstName:string="";
     lastName:string="";
+    userIsliked:boolean = false;
+    likesCount:number = -1;
+    userLikedList:UserLiked[]=[];
 }
