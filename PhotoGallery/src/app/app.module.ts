@@ -23,6 +23,7 @@ import { RegisterUserComponent } from './components/register-user/register-user.
 import {MatMenuModule} from '@angular/material/menu'
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
+import { AutocompleteOffDirective } from './autocomplete-off.directive';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     EditAlbumComponent,
     ImagePreviewComponent,
     LoginComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    AutocompleteOffDirective
   ],
   imports: [
     BrowserModule,
