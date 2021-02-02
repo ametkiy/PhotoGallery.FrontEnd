@@ -31,18 +31,15 @@ export class RegisterUserComponent implements OnInit {
   }
 
   onSubmit(){
-    if(this.registerForm.controls.userName.value===''|| this.registerForm.controls.password.value==='' 
-        || this.registerForm.controls.firstName.value === '' || this.registerForm.controls.last_name.value === '' 
-        || this.registerForm.controls.email.value === ''){alert ("All fields must be completed."); return}
-    if (this.registerForm.controls.password.value !== this.registerForm.controls.passwordConfirmation.value){ alert("Password does not match password confirmation"); return;}
+    if (this.registerForm.value.password !== this.registerForm.value.passwordConfirmation){ alert("Password does not match password confirmation"); return;}
 
     let user = new RegisterUser();
     user = {
-      userName: this.registerForm.controls.username.value,
-      email: this.registerForm.controls.email.value,
-      password: this.registerForm.controls.password.value,
-      firstName: this.registerForm.controls.first_name.value,
-      lastName: this.registerForm.controls.last_name.value,
+      userName: this.registerForm.value.userName,
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+      firstName: this.registerForm.value.firstName,
+      lastName: this.registerForm.value.lastName,
     }
 
     this.accountService.registrUser(user).subscribe((result: any) =>{
